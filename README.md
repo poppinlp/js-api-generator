@@ -20,10 +20,11 @@ npm install js-api-generator --save
 
 ### About Generated Module
 
-Each api will accept a object param which will be sent as ajax data.
-The `needs` api config will be checked in this param.
+Each api will accept a object param which will be sent as ajax data. The `needs` api config will be checked in this param.
 
 Each api will return a Promise. Resolve or reject will determined by `isSuccess` api config.
+
+Each api won't send request again until response.
 
 The callback function in promise will accept a object param. Its content is determined by `success` or `fail` api config.
 
