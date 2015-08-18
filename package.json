@@ -1,7 +1,7 @@
 {
   "name": "js-api-generator",
-  "version": "0.0.1",
-  "description": "Generate api module.",
+  "version": "0.0.2",
+  "description": "Generate api CommonJS module from config file.",
   "main": "lib/main.js",
   "scripts": {
     "test": "node ./test/test.js"
