@@ -1,0 +1,5 @@
+{
+    "errorInconsistentParam": "请求失败: 返回结果中无预期参数",
+    "errorMissParam": "请求失败: 缺少参数",
+    "errorBadNetwork": "请求失败: 网络不稳定或服务器繁忙"
+}

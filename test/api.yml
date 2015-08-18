@@ -1,0 +1,32 @@
+api:
+-
+    url: algorithm/create.do
+    type: put
+    name: createAlgorithm
+    needs:
+        - username
+        - displayName
+    success:
+        - algorithmId
+        - updateTime
+-
+    url: user/isLogin.do
+    type: get
+    name: checkLogin
+    success:
+        - username
+        - avatar
+-
+    url: user/edit.do
+    type: post
+    name: editUser
+    needs:
+        - job
+        - username
+config:
+    jquery: jQuery
+    isSuccess:
+        code: 0
+    ignoreResponse: false
+    fail:
+        - message
