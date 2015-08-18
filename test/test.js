@@ -1,10 +1,15 @@
 var api = require('../lib/main.js');
 
-console.log(api({
+api({
     target: './api.yml'
-}));
+});
 
-console.log(api({
+api({
     target: './api.yml',
     uglify: true
-}));
+});
+
+api({
+    target: './api.yml',
+    browserify: true
+});

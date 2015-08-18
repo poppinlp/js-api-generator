@@ -1,7 +1,7 @@
 {
   "name": "js-api-generator",
-  "version": "0.0.2",
-  "description": "Generate api CommonJS module from config file.",
+  "version": "0.0.3",
+  "description": "Generate api module from config file.",
   "main": "lib/main.js",
   "scripts": {
     "test": "node ./test/test.js"
@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/poppinlp/js-api-generator#readme",
   "dependencies": {
+    "browserify": "^11.0.1",
     "extend": "^3.0.0",
     "js-yaml": "^3.3.1",
     "mustache": "^2.1.3",

@@ -6,9 +6,10 @@
 
 Generate api module:
 
-- follow the CommonJS specification
+- follow CommonJS specification
 - from easy config file
 - with Promise returned
+- and builtin browserify
 
 ## Getting Started
 
@@ -27,8 +28,6 @@ Each api will return a Promise. Resolve or reject will determined by `isSuccess`
 Each api won't send request again until response.
 
 The callback function in promise will accept a object param. Its content is determined by `success` or `fail` api config.
-
-You could use CommonJS module in browser by [browserify](https://github.com/substack/node-browserify) or other tools.
 
 ### Generated Module Usage Example
 
@@ -170,6 +169,13 @@ config:
 
 Yaml config file path. Should be relative to the file you run this command.
 
+#### browserify {String}
+
+Default: `''`
+
+Whether to browserify generated module. If it's not empty, will do browserify and module name is the string you set.
+Then you could use generated module in browser like [Generated Module Usage Example](#user-content-about-generated-module).
+
 #### uglify {Boolean}
 
 Default: `false`
@@ -211,5 +217,6 @@ node ./test/test.js
 
 ## History
 
-- Ver 0.0.2 Add `outputFile`
-- Ver 0.0.1 Init
+- Ver 0.0.3 - Add `browserify`
+- Ver 0.0.2 - Add `outputFile`
+- Ver 0.0.1 - Init
