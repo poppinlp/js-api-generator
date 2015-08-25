@@ -217,7 +217,7 @@ node ./test/test.js
 
 ## History
 
-- Ver 0.0.6 - Bugfix
+- Ver 0.0.7 - Bugfix
 - Ver 0.0.3 - Add `browserify`
 - Ver 0.0.2 - Add `outputFile`
 - Ver 0.0.1 - Init
