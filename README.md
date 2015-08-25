@@ -167,7 +167,7 @@ config:
 
 #### target {String}
 
-Yaml config file path. Should be relative to the file you run this command.
+Yaml config file path. Should be absolute path or relative to the file you run this command.
 
 #### browserify {String}
 
@@ -197,7 +197,7 @@ Language for warn message. Support list:
 
 #### outputFile {String}
 
-The file path to output result. Should be relative to the file you run this command.
+The file path to output result. Should be absolute path or relative to the file you run this command.
 
 ### Package Usage Example
 
@@ -217,7 +217,7 @@ node ./test/test.js
 
 ## History
 
-- Ver 0.0.7 - Bugfix
+- Ver 0.1.0 - Bugfix
 - Ver 0.0.3 - Add `browserify`
 - Ver 0.0.2 - Add `outputFile`
 - Ver 0.0.1 - Init
