@@ -101,6 +101,12 @@ Default is `jQuery`.
 
 The jQuery object in your environment.
 
+#### promise {String}
+
+Default is `Promise`.
+
+The promise object in your environment.
+
 #### isSuccess {Object}
 
 Use to determine success or fail. All of its keys in response and values equal will be determined as success.
@@ -217,6 +223,7 @@ node ./test/test.js
 
 ## History
 
+- Ver 0.1.6 - Support custom promise instead of jQuery Deferred
 - Ver 0.1.5 - Bugfix
 - Ver 0.0.3 - Add `browserify`
 - Ver 0.0.2 - Add `outputFile`
