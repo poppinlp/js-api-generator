@@ -223,7 +223,12 @@ node ./test/test.js
 
 ## History
 
-- Ver 0.1.7 - Support custom promise instead of jQuery Deferred; Bugfix
-- Ver 0.0.3 - Add `browserify`
-- Ver 0.0.2 - Add `outputFile`
-- Ver 0.0.1 - Init
+- Ver 0.2.0
+    - Reconstruct repo
+    - Support promise list instead of ignore for same request which is waiting response
+- Ver 0.1.7
+    - Support custom promise instead of jQuery Deferred
+    - Bugfix
+- Ver 0.0.3 \- Add `browserify`
+- Ver 0.0.2 \- Add `outputFile`
+- Ver 0.0.1 \- Init
