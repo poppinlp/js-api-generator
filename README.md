@@ -223,6 +223,7 @@ node ./test/test.js
 
 ## History
 
+- Ver 0.2.1 \- Bugfix
 - Ver 0.2.0
     - Reconstruct repo
     - Support promise list instead of ignore for same request which is waiting response
