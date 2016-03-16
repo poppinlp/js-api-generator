@@ -13,3 +13,8 @@ console.log(api({
     target: './api.yml',
     browserify: true
 }));
+
+console.log(api({
+    target: './api.yml',
+    module: 'es2015'
+}));

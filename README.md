@@ -205,6 +205,13 @@ Language for warn message. Support list:
 
 The file path to output result. Should be absolute path or relative to the file you run this command.
 
+#### module {String}
+
+The output file will follow this module spec. Welcome PR to add more.
+
+- CommonJS
+- ES2015
+
 ### Package Usage Example
 
 ```js
@@ -223,6 +230,8 @@ node ./test/test.js
 
 ## History
 
+- Ver 0.2.4
+    - Support ES2015 and CommonJS output
 - Ver 0.2.3 \- Bugfix
 - Ver 0.2.0
     - Reconstruct repo
