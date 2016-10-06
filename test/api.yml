@@ -1,6 +1,6 @@
 api:
 -
-    url: algorithm/create.do
+    url: /algorithm/create.do
     type: put
     name: createAlgorithm
     needs:
@@ -10,21 +10,22 @@ api:
         - algorithmId
         - updateTime
 -
-    url: user/isLogin.do
+    url: /user/isLogin.do
     type: get
     name: checkLogin
     success:
         - username
         - avatar
 -
-    url: user/edit.do
+    url: /user/edit.do
     type: post
     name: editUser
+    isSuccess:
+        status: true
     needs:
         - job
         - username
 config:
-    jquery: jQuery
     isSuccess:
         code: 0
     ignoreResponse: false

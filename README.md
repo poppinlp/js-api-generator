@@ -4,11 +4,12 @@
 [![Dependency Status](https://david-dm.org/poppinlp/js-api-generator.svg)](https://david-dm.org/poppinlp/js-api-generator)
 [![devDependency Status](https://david-dm.org/poppinlp/js-api-generator/dev-status.svg)](https://david-dm.org/poppinlp/js-api-generator#info=devDependencies)
 
-Generate api module:
+Generate module for API requesting:
 
-- follow CommonJS specification
+- follow CommonJS specification or ES2015
 - from easy config file
 - with Promise returned
+- by XMLHttpRequest or fetch API (Current version use fetch API to request. Wish to use XMLHttpRequest? See [tag 0.2.4](https://github.com/poppinlp/js-api-generator/tree/v0.2.4))
 - and builtin browserify
 
 ## Getting Started
@@ -21,41 +22,59 @@ npm install js-api-generator --save
 
 ## About Generated Module
 
-Each api will accept a object param which will be sent as ajax data. The `needs` api config will be checked in this param.
+This part is for generated module.
 
-Each api will return a Promise. Resolve or reject will determined by `isSuccess` api config.
-
-Each api won't send request again until response.
-
-The callback function in promise will accept a object param. Its content is determined by `success` or `fail` api config.
+- Each API accepts an object param which will be sent as ajax data. The `needs` api config will be checked in this param.
+- Each API returns a Promise. Resolve or reject will determined by `isSuccess` api config.
+- Each API won't send request again before response or timeout, but callback will be queued which will all be triggered when get response or timeout.
+- The callback function accepts an object param which content is determined by `success` or `fail` api config.
 
 ### Generated Module Usage Example
 
-```js
-var api = require('api-module');
+#### Node env with CommonJS output
 
-api.apiName({
+```js
+var api = require('path/to/generated-api-module');
+
+api.yourApiName({
     // data to send
-}).then(function (res) {
-    // res object is determined by `success` config
+}).then(res => {
+    // res object content is determined by `success` config
     // do some stuff for success
-}, function (res) {
-    // res object is determined by `fail` config
+}, err => {
+    // err object content is determined by `fail` config
     // do some stuff for fail
 });
 ```
 
+#### Browser env with browserify output
+
+```html
+<script src="path/to/generated-api-module.js"></script>
+<script>
+api.yourApiName({
+    // data to send
+}).then(res => {
+    // res object content is determined by `success` config
+    // do some stuff for success
+}, err => {
+    // err object content is determined by `fail` config
+    // do some stuff for fail
+});
+</script>
+```
+
 ## About Config File
 
-Config file should be [YAML](http://www.yaml.org/spec/1.2/spec.html) format and could have `api` and `config` object.
+Config file should be [YAML](http://www.yaml.org/spec/1.2/spec.html) format and should have `api` and `config` object.
 
 ### api
 
-Provide api list. Each api could have these options:
+Provide api list. Each api could have follow options:
 
 #### url {String}
 
-The url to send request.
+The url for requesting.
 
 #### name {String}
 
@@ -69,13 +88,7 @@ The request type. Ignore upper or lower case.
 
 #### needs {Array}
 
-Use to check for existent and not empty when api called.
-
-#### context {Object}
-
-Default is `window`.
-
-Callback function will call in this context.
+String in this array will be used as property name to check existent and not empty in request data.
 
 #### timeout {Number}
 
@@ -83,37 +96,40 @@ Default is `5000`.
 
 Limit request timeout. Milliseconds.
 
+#### isSuccess {Object}
+
+Use to determine success or fail for requesting.
+
+- success: there is a same key-value pair in response object for every key-value pair in this object
+- fail: any mismatch
+
 #### success {Array}
 
-Use to constitute a callback param for success.
+Use to constitute a callback param when success.
 
 #### fail {Array}
 
-Use to constitute a callback param for fail.
+Use to constitute a callback param when fail.
 
 ### config
 
-Provide global options. Could have these options:
+Provide global options. Could have follow options:
 
 #### jquery {String}
 
 Default is `jQuery`.
 
-The jQuery object in your environment.
+The global jquery object in your environment.
 
 #### promise {String}
 
 Default is `Promise`.
 
-The promise object in your environment.
+The global promise object in your environment.
 
 #### isSuccess {Object}
 
-Use to determine success or fail. All of its keys in response and values equal will be determined as success.
-
-#### context {Object}
-
-For all api. Will be covered by `api.context`.
+For all api. Will be covered by `api.isSuccess`.
 
 #### timeout {Number}
 
@@ -129,14 +145,16 @@ For all api. Will be extended by `api.fail`.
 
 #### ignoreResponse {Boolean}
 
-If response has no param which success or fail need, whether to throw an error or not.
+Default is `false`.
+
+If response dose not have param which success or fail need, whether to throw an error or not.
 
 ### Config File Example
 
 ```yml
 api:
 -
-    url: user/create
+    url: /user/create
     type: put
     name: createUser
     needs:
@@ -145,14 +163,14 @@ api:
     success:
         - userId
 -
-    url: user/isLogin
+    url: /user/isLogin
     type: get
     name: checkLogin
     success:
         - username
         - avatar
 -
-    url: user/edit
+    url: /user/edit
     type: post
     name: editUser
     needs:
@@ -169,7 +187,11 @@ config:
 
 ## About This Package
 
+This part is for using this package.
+
 ### Options
+
+The follow options are used for this package, not for yaml config.
 
 #### target {String}
 
@@ -180,37 +202,45 @@ Yaml config file path. Should be absolute path or relative to the file you run t
 Default: `''`
 
 Whether to browserify generated module. If it's not empty, will do browserify and module name is the string you set.
-Then you could use generated module in browser like [Generated Module Usage Example](#user-content-about-generated-module).
+Then you could use generated module in browser like [Generated Module Usage Example](#user-content-generated-module-usage-example).
 
 #### uglify {Boolean}
 
 Default: `false`
 
-Do uglify or not.
+Compress code with uglify or not.
 
 #### uglifyOptions {Object}
 
-Options for uglify job. You can find all options [here](https://github.com/mishoo/UglifyJS2).
+Options for uglify. It's only work if `uglify` option is `true`. You can find all options [here](https://github.com/mishoo/UglifyJS2).
 
 #### lang {String}
 
 Default: `english`
 
-Language for warn message. Support list:
+Language for warn message. Ignore case. Welcome PR to add more. Support list:
 
-- chinese
-- english
+- Chinese
+- English
 
 #### outputFile {String}
 
-The file path to output result. Should be absolute path or relative to the file you run this command.
+The file path to output result. Should be absolute path or relative to the file which use this package.
 
 #### module {String}
 
-The output file will follow this module spec. Welcome PR to add more.
+Default: `commonjs`
+
+The output file follows the module spec you choose. Ignore case. Welcome PR to add more. Support list:
 
 - CommonJS
 - ES2015
+
+#### encoding {String}
+
+Default is `utf8`.
+
+File encoding for config file and output file.
 
 ### Package Usage Example
 
@@ -225,20 +255,28 @@ var result = api({
 ## Demo
 
 ```shell
-node ./test/test.js
+npm test
 ```
 
 ## History
 
+- Ver 0.3.0
+    - Use [fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) instead of XMLHttpRequest
+    - Put `isSuccess` option to every api not only global
+    - Remove global option `jQuery`
+    - Remove global option `context`
+    - Add global option `encoding`
+    - Use babel to transform code
 - Ver 0.2.4
     - Support ES2015 and CommonJS output
-- Ver 0.2.3 \- Bugfix
 - Ver 0.2.0
     - Reconstruct repo
     - Support promise list instead of ignore for same request which is waiting response
 - Ver 0.1.7
     - Support custom promise instead of jQuery Deferred
-    - Bugfix
-- Ver 0.0.3 \- Add `browserify`
-- Ver 0.0.2 \- Add `outputFile`
-- Ver 0.0.1 \- Init
+- Ver 0.0.3
+    - Add `browserify` option
+- Ver 0.0.2
+    - Add `outputFile` option
+- Ver 0.0.1
+    - Init
