@@ -26,8 +26,8 @@ module.exports = options => {
 
     var inputFilePath = path.isAbsolute(options.target) ? options.target : path.join(pwd, options.target),
 
-        tpl = hogan.compile(fs.readFileSync(path.join(__dirname, './api.tpl.js'), selfEncoding)),
-        moduleTpl = hogan.compile(fs.readFileSync(path.join(__dirname, `./${options.module.toLowerCase()}.tpl.js`), selfEncoding)),
+        tpl = hogan.compile(fs.readFileSync(path.join(__dirname, 'lib', 'api.tpl.js'), selfEncoding)),
+        moduleTpl = hogan.compile(fs.readFileSync(path.join(__dirname, 'lib', `${options.module.toLowerCase()}.tpl.js`), selfEncoding)),
         apiConfig = yaml.safeLoad(fs.readFileSync(inputFilePath, {
             encoding: options.encoding
         })),
@@ -61,7 +61,7 @@ module.exports = options => {
             })).join('')
         }, (() => {
             var file = options.lang.toLowerCase(),
-                filePath = path.join(__dirname, '../lang', `${file}.json`);
+                filePath = path.join(__dirname, 'lang', `${file}.json`);
 
             if (!fs.existsSync(filePath)) {
                 throw new Error(`Don't support language: ${file}. Welcome to contribute on Github repo.`);
@@ -75,15 +75,14 @@ module.exports = options => {
         var tmpFile = './_.api.generator.tmp';
 
         fs.writeFileSync(tmpFile, tpl, selfEncoding);
-        execSync(path.join(__dirname, '../node_modules/.bin/browserify') + ` -r ${tmpFile}:${options.browserify} > ${tmpFile}2`);
+        execSync(path.join(__dirname, 'node_modules/.bin/browserify') + ` -r ${tmpFile}:${options.browserify} > ${tmpFile}2`);
         tpl = fs.readFileSync(`${tmpFile}2`, selfEncoding);
         fs.unlinkSync(tmpFile);
         fs.unlinkSync(`${tmpFile}2`);
     })();
 
     tpl = babel.transform(tpl, {
-        presets: ['latest'],
-        compact: false
+        extends: './.babelrc'
     }).code;
 
     if (options.uglify) {

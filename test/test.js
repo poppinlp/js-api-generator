@@ -1,4 +1,4 @@
-var api = require('../lib/main.js');
+var api = require('../main.js');
 
 console.log('TEST DEFAULT CONFIG...');
 api({
