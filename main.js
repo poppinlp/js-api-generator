@@ -14,8 +14,6 @@ const
     };
 
 module.exports = options => {
-    var pwd = path.dirname(process.mainModule.filename);
-
     options = _.extend({
         uglify: false,
         lang: 'english',
@@ -24,7 +22,8 @@ module.exports = options => {
         encoding: 'utf8'
     }, options);
 
-    var inputFilePath = path.isAbsolute(options.target) ? options.target : path.join(pwd, options.target),
+    var pwd = path.dirname(process.mainModule.filename),
+        inputFilePath = path.isAbsolute(options.target) ? options.target : path.join(pwd, options.target),
 
         tpl = hogan.compile(fs.readFileSync(path.join(__dirname, 'lib', 'api.tpl.js'), selfEncoding)),
         moduleTpl = hogan.compile(fs.readFileSync(path.join(__dirname, 'lib', `${options.module.toLowerCase()}.tpl.js`), selfEncoding)),
@@ -82,7 +81,7 @@ module.exports = options => {
     })();
 
     tpl = babel.transform(tpl, {
-        extends: './.babelrc'
+        extends: path.join(__dirname, '.babelrc')
     }).code;
 
     if (options.uglify) {
