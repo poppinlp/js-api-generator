@@ -82,9 +82,7 @@ The method name for this api in generated module.
 
 #### type {String}
 
-Default is `post`.
-
-The request type. Ignore upper or lower case.
+The request type such as `post`. Ignore upper or lower case.
 
 #### needs {Array}
 
@@ -92,9 +90,15 @@ String in this array will be used as property name to check existent and not emp
 
 #### timeout {Number}
 
-Default is `5000`.
-
 Limit request timeout. Milliseconds.
+
+#### mode {String}
+
+The request mode for fetch API. Could be `cors`, `no-cors`, `same-origin`.
+
+#### credentials {String}
+
+The request credentials for fetch API. Could be `omit`, `same-origin`, `include`.
 
 #### isSuccess {Object}
 
@@ -117,35 +121,61 @@ Provide global options. Could have follow options:
 
 #### jquery {String}
 
-Default is `jQuery`.
+Default: `jQuery`.
 
 The global jquery object in your environment.
 
 #### promise {String}
 
-Default is `Promise`.
+Default: `Promise`.
 
 The global promise object in your environment.
 
+#### type {String}
+
+Default: `get`.
+
+For all api. Will be covered by `api.type`.
+
+#### mode {String}
+
+Default: `same-origin`.
+
+For all api. Will be covered by `api.mode`.
+
+#### credentials {String}
+
+Default: `same-origin`.
+
+For all api. Will be covered by `api.credentials`.
+
 #### isSuccess {Object}
+
+Default: `{}`
 
 For all api. Will be covered by `api.isSuccess`.
 
 #### timeout {Number}
 
+Default: `5000`.
+
 For all api. Will be covered by `api.timeout`.
 
 #### success {Array}
+
+Default: `[]`
 
 For all api. Will be extended by `api.success`.
 
 #### fail {Array}
 
+Default: `[]`
+
 For all api. Will be extended by `api.fail`.
 
 #### ignoreResponse {Boolean}
 
-Default is `false`.
+Default: `false`.
 
 If response dose not have param which success or fail need, whether to throw an error or not.
 
@@ -241,7 +271,7 @@ Then you could use generated module in browser like [Generated Module Usage Exam
 
 #### encoding {String}
 
-Default is `utf8`.
+Default: `utf8`.
 
 File encoding for config file and output file.
 

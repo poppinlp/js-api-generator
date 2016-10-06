@@ -36,8 +36,10 @@ module.exports = options => {
             timeout: 5000,
             success: [],
             fail: [],
-            outputFile: '',
-            promise: 'Promise'
+            promise: 'Promise',
+            type: 'get',
+            mode: 'same-origin',
+            credentials: 'same-origin'
         }, apiConfig.config);
 
     tpl = tpl.render(_.extend({
@@ -51,7 +53,9 @@ module.exports = options => {
                 promise: config.promise,
                 needs: JSON.stringify(api.needs || []),
                 url: api.url,
-                type: api.type || 'post',
+                type: api.type || config.type,
+                mode: api.mode || config.mode,
+                credentials: api.credentials || config.credentials,
                 timeout: api.timeout || config.timeout,
                 isSuccess: JSON.stringify(api.isSuccess || config.isSuccess),
                 successParam: JSON.stringify(config.success.concat(api.success || [])),

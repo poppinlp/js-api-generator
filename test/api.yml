@@ -3,6 +3,7 @@ api:
     url: /algorithm/create.do
     type: put
     name: createAlgorithm
+    mode: 'cors'
     needs:
         - username
         - displayName
