@@ -10,7 +10,7 @@ Generate module for API requesting:
 - from easy config file
 - with Promise returned
 - by XMLHttpRequest or fetch API (Current version use fetch API to request. Wish to use XMLHttpRequest? See [tag 0.2.4](https://github.com/poppinlp/js-api-generator/tree/v0.2.4))
-- and builtin browserify
+- and builtin browserify and rollup
 
 ## Getting Started
 
@@ -47,7 +47,7 @@ api.yourApiName({
 });
 ```
 
-#### Browser env with browserify output
+#### Browser env with browserify or rollup output
 
 ```html
 <script src="path/to/generated-api-module.js"></script>
@@ -197,13 +197,6 @@ The follow options are used for this package, not for yaml config.
 
 Yaml config file path. Should be absolute path or relative to the file you run this command.
 
-#### browserify {String}
-
-Default: `''`
-
-Whether to browserify generated module. If it's not empty, will do browserify and module name is the string you set.
-Then you could use generated module in browser like [Generated Module Usage Example](#user-content-generated-module-usage-example).
-
 #### uglify {Boolean}
 
 Default: `false`
@@ -236,6 +229,16 @@ The output file follows the module spec you choose. Ignore case. Welcome PR to a
 - CommonJS
 - ES2015
 
+#### browser {Boolean|String}
+
+Default: `false`
+
+This option determine the output code could run in browser directly or not.
+If it's not `false`, it should be a string as a module name for browser global object.
+
+The CommonJS module will be transform with browserify and ES2015 module will be transform with rollup.
+Then you could use generated module in browser like [Generated Module Usage Example](#user-content-generated-module-usage-example).
+
 #### encoding {String}
 
 Default is `utf8`.
@@ -260,13 +263,13 @@ npm test
 
 ## History
 
-- Ver 0.3.0
-    - Use [fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) instead of XMLHttpRequest
+- Ver 1.0.0 and 2.0.0 (not release)
+    - Use [fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) instead of XMLHttpRequest (only in 2.0.0)
+    - Remove global option `jQuery` (only in 2.0.0)
     - Put `isSuccess` option to every api not only global
-    - Remove global option `jQuery`
     - Remove global option `context`
     - Add global option `encoding`
-    - Use babel to transform code
+    - Use `browser` option instead of `browserify` option
 - Ver 0.2.4
     - Support ES2015 and CommonJS output
 - Ver 0.2.0

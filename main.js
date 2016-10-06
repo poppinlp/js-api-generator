@@ -7,7 +7,6 @@ const
     _ = require('lodash'),
     uglify = require('uglify-js'),
     hogan = require('hogan.js'),
-    babel = require('babel-core'),
     execSync = require('child_process').execSync,
     selfEncoding = {
         encoding: 'utf8'
@@ -18,7 +17,7 @@ module.exports = options => {
         uglify: false,
         lang: 'english',
         module: 'commonjs',
-        browserify: '',
+        browser: false,
         encoding: 'utf8'
     }, options);
 
@@ -70,19 +69,24 @@ module.exports = options => {
         })())
     );
 
-    options.browserify && !(() => {
+    options.browser && options.browser !== 'false' && (() => {
         var tmpFile = './_.api.generator.tmp';
 
         fs.writeFileSync(tmpFile, tpl, selfEncoding);
-        execSync(path.join(__dirname, 'node_modules/.bin/browserify') + ` -r ${tmpFile}:${options.browserify} > ${tmpFile}2`);
+
+        ({
+            commonjs: () => {
+                execSync(path.join(__dirname, 'node_modules/.bin/browserify') + ` -r ${tmpFile}:${options.browser} > ${tmpFile}2`);
+            },
+            es2015: () => {
+                execSync(path.join(__dirname, 'node_modules/.bin/rollup') + ` -o ${tmpFile}2 -f iife -n ${options.browser} -- ${tmpFile}`);
+            }
+        })[options.module]();
+
         tpl = fs.readFileSync(`${tmpFile}2`, selfEncoding);
         fs.unlinkSync(tmpFile);
         fs.unlinkSync(`${tmpFile}2`);
     })();
-
-    tpl = babel.transform(tpl, {
-        extends: path.join(__dirname, '.babelrc')
-    }).code;
 
     if (options.uglify) {
         tpl = uglify.minify(tpl, _.extend(options.uglifyOptions, {
@@ -95,7 +99,7 @@ module.exports = options => {
         fs.writeFileSync(targetPath, tpl, {
             encoding: options.encoding
         });
-    } else {
-        return tpl;
     }
+
+    return tpl;
 };
