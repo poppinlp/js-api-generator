@@ -293,9 +293,9 @@ npm test
 
 ## History
 
-- Ver 1.0.0 and 2.0.0 (not release)
-    - Use [fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) instead of XMLHttpRequest (only in 2.0.0)
-    - Remove global option `jQuery` (only in 2.0.0)
+- Ver 1.0.0
+    - Use [fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) instead of XMLHttpRequest
+    - Remove global option `jQuery`
     - Put `isSuccess` option to every api not only global
     - Remove global option `context`
     - Add global option `encoding`
