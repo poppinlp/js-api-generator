@@ -293,6 +293,8 @@ npm test
 
 ## History
 
+- Ver 1.0.1
+    - Fix use URLSearchParams work with [fetch polyfill](https://github.com/github/fetch)
 - Ver 1.0.0
     - Use [fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) instead of XMLHttpRequest
     - Remove global option `jQuery`
