@@ -293,6 +293,8 @@ npm test
 
 ## History
 
+- Ver 1.0.2
+    - Fix `TypeMismatch` error in edge
 - Ver 1.0.1
     - Fix use URLSearchParams work with [fetch polyfill](https://github.com/github/fetch)
 - Ver 1.0.0
