@@ -38,6 +38,7 @@ module.exports = options => {
             fail: [],
             promise: 'Promise',
             type: 'get',
+            cache: 'default',
             mode: 'same-origin',
             credentials: 'same-origin'
         }, apiConfig.config);
@@ -46,15 +47,14 @@ module.exports = options => {
             apiConfig: JSON.stringify({
                 ignoreResponse: config.ignoreResponse
             }),
-            jquery: config.jquery,
             apiList: apiConfig.api.map(api => moduleTpl.render({
                 name: api.name,
-                $: config.jquery,
                 promise: config.promise,
                 needs: JSON.stringify(api.needs || []),
                 url: api.url,
                 type: api.type || config.type,
                 mode: api.mode || config.mode,
+                cache: api.cache || config.cache,
                 credentials: api.credentials || config.credentials,
                 timeout: api.timeout || config.timeout,
                 isSuccess: JSON.stringify(api.isSuccess || config.isSuccess),

@@ -100,6 +100,13 @@ The request mode for fetch API. Could be `cors`, `no-cors`, `same-origin`.
 
 The request credentials for fetch API. Could be `omit`, `same-origin`, `include`.
 
+#### cache {String}
+
+The request cache for fetch API. Could be `default`, `no-store`, `reload`, `no-cache`, `force-cache`, `only-if-cached`.
+
+Since the cache option [only support in Firefox 48+](https://developer.mozilla.org/en-US/docs/Web/API/Request/cache#Browser_compatibility),
+the request url will be added a query string automatically like jQuery ajax cache did when the cache value is `reload`, `no-cache` or `no-store`.
+
 #### isSuccess {Object}
 
 Use to determine success or fail for requesting.
@@ -119,12 +126,6 @@ Use to constitute a callback param when fail.
 
 Provide global options. Could have follow options:
 
-#### jquery {String}
-
-Default: `jQuery`.
-
-The global jquery object in your environment.
-
 #### promise {String}
 
 Default: `Promise`.
@@ -136,6 +137,12 @@ The global promise object in your environment.
 Default: `get`.
 
 For all api. Will be covered by `api.type`.
+
+#### cache {String}
+
+Default: `default`.
+
+For all api. Will be covered by `api.cache`.
 
 #### mode {String}
 
@@ -207,7 +214,6 @@ api:
         - job
         - nickname
 config:
-    jquery: jQuery
     isSuccess:
         code: 0
     ignoreResponse: false
@@ -293,6 +299,8 @@ npm test
 
 ## History
 
+- Ver 1.1.0
+    - Add `cache` option
 - Ver 1.0.2
     - Fix `TypeMismatch` error in edge
 - Ver 1.0.1
