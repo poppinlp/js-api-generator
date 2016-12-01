@@ -299,6 +299,8 @@ npm test
 
 ## History
 
+- Ver 1.2.0
+    - Support request data for GET method
 - Ver 1.1.0
     - Add `cache` option
 - Ver 1.0.2
