@@ -7,6 +7,7 @@ const
     _ = require('lodash'),
     uglify = require('uglify-js'),
     hogan = require('hogan.js'),
+    mkpath = require('mkpath'),
     execSync = require('child_process').execSync,
     selfEncoding = {
         encoding: 'utf8'
@@ -100,6 +101,8 @@ module.exports = options => {
 
     if (options.outputFile) {
         let targetPath = path.isAbsolute(options.outputFile) ? options.outputFile : path.join(pwd, options.outputFile);
+
+        mkpath.sync(path.parse(targetPath).dir);
         fs.writeFileSync(targetPath, tpl, {
             encoding: options.encoding
         });

@@ -1,6 +1,6 @@
 {
   "name": "js-api-generator",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Generate api module from config file.",
   "main": "main.js",
   "scripts": {
@@ -28,7 +28,8 @@
     "hogan.js": "^3.0.2",
     "js-yaml": "^3.7.0",
     "lodash": "^4.17.2",
-    "rollup": "^0.36.3",
+    "mkpath": "^1.0.0",
+    "rollup": "^0.41.4",
     "uglify-js": "^2.7.4"
   },
   "devDependencies": {

@@ -20,6 +20,12 @@ Install with this command:
 npm install js-api-generator --save
 ```
 
+or maybe you like yarn:
+
+```shell
+yarn add js-api-generator
+```
+
 ## About Generated Module
 
 This part is for generated module.
@@ -299,6 +305,8 @@ npm test
 
 ## History
 
+- Ver 1.2.1
+    - Auto create dir when output path not exists
 - Ver 1.2.0
     - Support request data for GET method
 - Ver 1.1.0
