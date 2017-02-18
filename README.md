@@ -239,21 +239,11 @@ The follow options are used for this package, not for yaml config.
 
 Yaml config file path. Should be absolute path or relative to the file you run this command.
 
-#### uglify {Boolean}
-
-Default: `false`
-
-Compress code with uglify or not.
-
-#### uglifyOptions {Object}
-
-Options for uglify. It's only work if `uglify` option is `true`. You can find all options [here](https://github.com/mishoo/UglifyJS2).
-
 #### lang {String}
 
 Default: `english`
 
-Language for warn message. Ignore case. Welcome PR to add more. Support list:
+Language for warn message. Ignore case. Welcome PR >.<
 
 - Chinese
 - English
@@ -305,33 +295,37 @@ npm test
 
 ## History
 
+- Ver 1.3.0
+    - Support `timeout` for fetch.
+    - The output for `es2015` module option is in es2015 syntax now. You should do babel yourself if you want.
+    - Remove `uglify` option. You should do uglify yourself if you want.
 - Ver 1.2.1
-    - Auto create dir when output path not exists
+    - Auto create dir when output path not exists.
 - Ver 1.2.0
-    - Support request data for GET method
+    - Support request data for GET method.
 - Ver 1.1.0
-    - Add `cache` option
+    - Add `cache` option.
 - Ver 1.0.2
-    - Fix `TypeMismatch` error in edge
+    - Fix `TypeMismatch` error in edge.
 - Ver 1.0.1
-    - Fix use URLSearchParams work with [fetch polyfill](https://github.com/github/fetch)
+    - Fix use URLSearchParams work with [fetch polyfill](https://github.com/github/fetch).
 - Ver 1.0.0
-    - Use [fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) instead of XMLHttpRequest
-    - Remove global option `jQuery`
-    - Put `isSuccess` option to every api not only global
-    - Remove global option `context`
-    - Add global option `encoding`
-    - Use `browser` option instead of `browserify` option
+    - Use [fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) instead of XMLHttpRequest.
+    - Remove global option `jQuery`.
+    - Put `isSuccess` option to every api not only global.
+    - Remove global option `context`.
+    - Add global option `encoding`.
+    - Use `browser` option instead of `browserify` option.
 - Ver 0.2.4
-    - Support ES2015 and CommonJS output
+    - Support ES2015 and CommonJS output.
 - Ver 0.2.0
-    - Reconstruct repo
-    - Support promise list instead of ignore for same request which is waiting response
+    - Reconstruct repo.
+    - Support promise list instead of ignore for same request which is waiting response.
 - Ver 0.1.7
-    - Support custom promise instead of jQuery Deferred
+    - Support custom promise instead of jQuery Deferred.
 - Ver 0.0.3
-    - Add `browserify` option
+    - Add `browserify` option.
 - Ver 0.0.2
-    - Add `outputFile` option
+    - Add `outputFile` option.
 - Ver 0.0.1
-    - Init
+    - Init.

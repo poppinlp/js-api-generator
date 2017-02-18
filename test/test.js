@@ -1,37 +1,31 @@
-var api = require('../main.js');
+var api = require('../main.js'),
+    log = console.log;
 
-console.log('TEST DEFAULT CONFIG...');
+log('TEST DEFAULT CONFIG...');
 api({
     target: './api.yml'
 });
-console.log('SUCCESS!');
+log('SUCCESS!');
 
-console.log('TEST UGLIFY...');
-api({
-    target: './api.yml',
-    uglify: true
-});
-console.log('SUCCESS!');
-
-console.log('TEST BROWSERIFY...');
+log('TEST BROWSERIFY...');
 api({
     target: './api.yml',
     browser: 'myModule'
 });
-console.log('SUCCESS!');
+log('SUCCESS!');
 
-console.log('TEST ES2015 MODULE...');
+log('TEST ES2015 MODULE...');
 api({
     target: './api.yml',
     module: 'es2015'
 });
-console.log('SUCCESS!');
+log('SUCCESS!');
 
-console.log('TEST ROLLUP...');
+log('TEST ROLLUP...');
 api({
     target: './api.yml',
     module: 'es2015',
     browser: 'myModule',
     outputFile: './output/output.js'
 });
-console.log('SUCCESS!');
+log('SUCCESS!');

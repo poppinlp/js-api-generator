@@ -15,6 +15,7 @@ api:
     type: get
     name: checkLogin
     cache: 'no-cache'
+    timeout: 10000
     needs:
         - test
     success:
