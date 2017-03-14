@@ -100,7 +100,7 @@ Limit request timeout. Milliseconds.
 
 #### mode {String}
 
-The request mode for fetch API. Could be `cors`, `no-cors`, `same-origin`.
+The request mode for fetch API. Could be `cors`, `no-cors`, `same-origin`, `navigate`, `websocket`.
 
 #### credentials {String}
 
