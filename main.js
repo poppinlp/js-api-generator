@@ -9,7 +9,7 @@ const
 
     REQUEST_TPL = path.join(__dirname, 'lib', 'request.tpl.js'),
     API_TPL = path.join(__dirname, 'lib', 'api.tpl.js'),
-    
+
     DEFAULT_OPTIONS = {
         lang: 'english',
         module: 'commonjs',
@@ -22,6 +22,7 @@ const
         timeout: 5000,
         success: [],
         fail: [],
+        needs: [],
         promise: 'Promise',
         type: 'get',
         cache: 'default',
@@ -29,7 +30,7 @@ const
         credentials: 'same-origin'
     };
 
-const readFile = s => fs.readFileSync(s, 'utf8');
+const readFile = (s, u = 'utf8') => fs.readFileSync(s, u);
 
 module.exports = options => {
     options = _.extend(DEFAULT_OPTIONS, options);
@@ -50,10 +51,7 @@ module.exports = options => {
             return yaml.safeLoad(readFile(filePath));
         })(),
 
-        userConfig = yaml.safeLoad(fs.readFileSync(inputFilePath, {
-            encoding: options.encoding
-        })),
-
+        userConfig = yaml.safeLoad(readFile(inputFilePath, options.encoding)),
         config = _.extend(DEFAULT_API_CONFIG, userConfig.config);
 
     reqTpl = reqTpl.render(_.extend({
@@ -61,21 +59,21 @@ module.exports = options => {
         userConfig: JSON.stringify({
             ignoreResponse: config.ignoreResponse
         }),
-        apiList: userConfig.api.map(api => apiTpl.render({
+        apiList: userConfig.api.map(api => (api = _.assignIn({}, config, api), apiTpl.render({
             isCommonJS: options.module === 'commonjs',
             name: api.name,
             promise: config.promise,
-            needs: JSON.stringify(api.needs || []),
+            needs: JSON.stringify(api.needs),
             url: api.url,
-            type: api.type || config.type,
-            mode: api.mode || config.mode,
-            cache: api.cache || config.cache,
-            credentials: api.credentials || config.credentials,
-            timeout: api.timeout || config.timeout,
-            isSuccess: JSON.stringify(api.isSuccess || config.isSuccess),
-            successParam: JSON.stringify(config.success.concat(api.success || [])),
-            failParam: JSON.stringify(config.fail.concat(api.fail || [])),
-        })).join('')
+            type: api.type,
+            mode: api.mode,
+            cache: api.cache,
+            credentials: api.credentials,
+            timeout: api.timeout,
+            isSuccess: JSON.stringify(api.isSuccess),
+            successParam: JSON.stringify(config.success.concat(api.success)),
+            failParam: JSON.stringify(config.fail.concat(api.fail)),
+        }))).join('')
     }, lang));
 
     options.browser && options.browser !== 'false' && (() => {
@@ -92,7 +90,7 @@ module.exports = options => {
             }
         })[options.module]();
 
-        reqTpl = fs.readFileSync(`${tmpFile}2`, 'utf8');
+        reqTpl = readFile(`${tmpFile}2`);
         fs.unlinkSync(tmpFile);
         fs.unlinkSync(`${tmpFile}2`);
     })();

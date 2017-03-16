@@ -92,6 +92,8 @@ The request type such as `post`. Ignore upper or lower case.
 
 #### needs {Array}
 
+Default: `[]`
+
 String in this array will be used as property name to check existent and not empty in request data.
 
 #### timeout {Number}
@@ -289,12 +291,12 @@ var result = api({
 
 ## Demo
 
-```shell
-npm test
-```
+See `./test/api.yml`.
 
 ## History
 
+- Ver 1.4.0
+    - Support params in url.
 - Ver 1.3.0
     - Support `timeout` for fetch.
     - The output for `es2015` module option is in es2015 syntax now. You should do babel yourself if you want.

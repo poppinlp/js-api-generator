@@ -1,6 +1,6 @@
 api:
 -
-    url: /algorithm/create.do
+    url: //www.123.com/test/test1
     type: put
     name: createAlgorithm
     mode: 'cors'
@@ -11,8 +11,8 @@ api:
         - algorithmId
         - updateTime
 -
-    url: /user/isLogin.do
-    type: get
+    url: /test/test2
+    type: delete
     name: checkLogin
     cache: 'no-cache'
     timeout: 10000
@@ -22,7 +22,7 @@ api:
         - username
         - avatar
 -
-    url: /user/edit.do
+    url: /test/test3
     type: post
     name: editUser
     isSuccess:
@@ -30,6 +30,13 @@ api:
     needs:
         - job
         - username
+-
+    url: /test/:sid/:pid
+    type: get
+    name: getPt
+    needs:
+        - sid
+        - pid
 config:
     isSuccess:
         code: 0
