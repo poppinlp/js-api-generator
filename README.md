@@ -90,11 +90,22 @@ The method name for this api in generated module.
 
 The request type such as `post`. Ignore upper or lower case.
 
-#### needs {Array}
+#### needs {Array | Object}
 
 Default: `[]`
 
-String in this array will be used as property name to check existent and not empty in request data.
+If this is an array, strings in it will be used as property name to check existent and not empty in request data.
+If this is an object, the key will be used as property name and the value as variable type(or type list) for data check.
+
+Support variable type check list:
+
+- String
+- Number
+- Boolean
+- Null
+- Array
+- Object
+- Any
 
 #### timeout {Number}
 
@@ -295,8 +306,10 @@ See `./test/api.yml`.
 
 ## History
 
+- Ver 1.5.0
+    - Support type check for `needs` data. See [detail](#needs-array-object).
 - Ver 1.4.0
-    - Support params in url.
+    - Support variables in url whose value comes from data object.
 - Ver 1.3.0
     - Support `timeout` for fetch.
     - The output for `es2015` module option is in es2015 syntax now. You should do babel yourself if you want.
@@ -318,16 +331,3 @@ See `./test/api.yml`.
     - Remove global option `context`.
     - Add global option `encoding`.
     - Use `browser` option instead of `browserify` option.
-- Ver 0.2.4
-    - Support ES2015 and CommonJS output.
-- Ver 0.2.0
-    - Reconstruct repo.
-    - Support promise list instead of ignore for same request which is waiting response.
-- Ver 0.1.7
-    - Support custom promise instead of jQuery Deferred.
-- Ver 0.0.3
-    - Add `browserify` option.
-- Ver 0.0.2
-    - Add `outputFile` option.
-- Ver 0.0.1
-    - Init.

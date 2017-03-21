@@ -1,4 +1,5 @@
-errorInconsistentParam": "Request faild: No enough expectation parameters in response"
+errorInconsistentParam": "Request failed: No enough expectation parameters in response"
 errorMissParam": "Request failed: Missing parameters"
 errorBadNetwork": "Request failed: Network instability or server busy, please try again later"
-errorTimeout: 'Request faild: Response timeout'
+errorTimeout: 'Request failed: Response timeout'
+errorTypeCheck: 'Request failed: Can not pass params type check'

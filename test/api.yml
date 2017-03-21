@@ -28,8 +28,8 @@ api:
     isSuccess:
         status: true
     needs:
-        - job
-        - username
+        username: String
+        id: Number
 -
     url: /test/:sid/:pid
     type: get
