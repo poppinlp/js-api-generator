@@ -1,0 +1,3 @@
+- Split changelog from README.md
+- Add browser compatibility in README.md
+- Update test script

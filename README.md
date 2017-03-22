@@ -10,7 +10,8 @@ Generate module for API requesting:
 - from easy config file
 - with Promise returned
 - by XMLHttpRequest or fetch API (Current version use fetch API to request. Wish to use XMLHttpRequest? See [tag 0.2.4](https://github.com/poppinlp/js-api-generator/tree/v0.2.4))
-- and builtin browserify and rollup
+- builtin browserify and rollup
+- e.t.c
 
 ## Getting Started
 
@@ -95,6 +96,7 @@ The request type such as `post`. Ignore upper or lower case.
 Default: `[]`
 
 If this is an array, strings in it will be used as property name to check existent and not empty in request data.
+
 If this is an object, the key will be used as property name and the value as variable type(or type list) for data check.
 
 Support variable type check list:
@@ -124,7 +126,7 @@ The request credentials for fetch API. Could be `omit`, `same-origin`, `include`
 The request cache for fetch API. Could be `default`, `no-store`, `reload`, `no-cache`, `force-cache`, `only-if-cached`.
 
 Since the cache option [only support in Firefox 48+](https://developer.mozilla.org/en-US/docs/Web/API/Request/cache#Browser_compatibility),
-the request url will be added a query string automatically like jQuery ajax cache did when the cache value is `reload`, `no-cache` or `no-store`.
+the request url will be added a query string automatically like what jQuery ajax cache did when the cache value is `reload`, `no-cache` or `no-store`.
 
 #### isSuccess {Object}
 
@@ -210,28 +212,43 @@ If response dose not have param which success or fail need, whether to throw an 
 ```yml
 api:
 -
-    url: /user/create
+    url: //www.123.com/test/test1
     type: put
-    name: createUser
+    name: createAlgorithm
+    mode: 'cors'
     needs:
         - username
-        - password
+        - displayName
     success:
-        - userId
+        - algorithmId
+        - updateTime
 -
-    url: /user/isLogin
-    type: get
+    url: /test/test2
+    type: delete
     name: checkLogin
+    cache: 'no-cache'
+    timeout: 10000
+    needs:
+        - test
     success:
         - username
         - avatar
 -
-    url: /user/edit
+    url: /test/test3
     type: post
     name: editUser
+    isSuccess:
+        status: true
     needs:
-        - job
-        - nickname
+        username: String
+        id: Number
+-
+    url: /test/:sid/:pid
+    type: get
+    name: getPt
+    needs:
+        - sid
+        - pid
 config:
     isSuccess:
         code: 0
@@ -309,7 +326,7 @@ See `./test/api.yml`.
 - Ver 1.6.0
     - Throw response instead of msg when status is not 200.
 - Ver 1.5.0
-    - Support type check for `needs` data. See [detail](#needs-array-object).
+    - Support type check for `needs` data. See [detail](#needs-array--object).
 - Ver 1.4.0
     - Support variables in url whose value comes from data object.
 - Ver 1.3.0
