@@ -306,6 +306,8 @@ See `./test/api.yml`.
 
 ## History
 
+- Ver 1.6.0
+    - Throw response instead of msg when status is not 200.
 - Ver 1.5.0
     - Support type check for `needs` data. See [detail](#needs-array-object).
 - Ver 1.4.0
