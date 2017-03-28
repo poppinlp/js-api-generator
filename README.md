@@ -35,6 +35,7 @@ This part is for generated module.
 - Each API returns a Promise. Resolve or reject will determined by `isSuccess` api config.
 - Each API won't send request again before response or timeout, but callback will be queued which will all be triggered when get response or timeout.
 - The callback function accepts an object param which content is determined by `success` or `fail` api config.
+- The output module is in ES2015 syntax. You should do [babel](https://babeljs.io/) or [buble](https://buble.surge.sh/) yourself if you want.
 
 ### Generated Module Usage Example
 
@@ -207,6 +208,10 @@ Default: `false`.
 
 If response dose not have param which success or fail need, whether to throw an error or not.
 
+#### errorMessage {Object}
+
+The error message you supply will overwrite default error message by same name.
+
 ### Config File Example
 
 ```yml
@@ -273,7 +278,7 @@ Yaml config file path. Should be absolute path or relative to the file you run t
 
 Default: `english`
 
-Language for warn message. Ignore case. Welcome PR >.<
+Language for error message. Ignore case. Welcome PR >.<
 
 - Chinese
 - English
@@ -317,36 +322,13 @@ var result = api({
 });
 ```
 
+## Browser Compatibility
+
+|		| Chrome | Firefox | Edge | IE | Opera | Safari |
+| ----- | ------ | ------- | ---- | -- | ----- | ------ |
+| Output file | 45.0 | 22.0 | Yes | No support | 32	| 10.0 |
+| Compile with babel or buble | Yes | Yes | Yes | Yes | Yes | Yes |
+
 ## Demo
 
 See `./test/api.yml`.
-
-## History
-
-- Ver 1.6.0
-    - Throw response instead of msg when status is not 200.
-- Ver 1.5.0
-    - Support type check for `needs` data. See [detail](#needs-array--object).
-- Ver 1.4.0
-    - Support variables in url whose value comes from data object.
-- Ver 1.3.0
-    - Support `timeout` for fetch.
-    - The output for `es2015` module option is in es2015 syntax now. You should do babel yourself if you want.
-    - Remove `uglify` option. You should do uglify yourself if you want.
-- Ver 1.2.1
-    - Auto create dir when output path not exists.
-- Ver 1.2.0
-    - Support request data for GET method.
-- Ver 1.1.0
-    - Add `cache` option.
-- Ver 1.0.2
-    - Fix `TypeMismatch` error in edge.
-- Ver 1.0.1
-    - Fix use URLSearchParams work with [fetch polyfill](https://github.com/github/fetch).
-- Ver 1.0.0
-    - Use [fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) instead of XMLHttpRequest.
-    - Remove global option `jQuery`.
-    - Put `isSuccess` option to every api not only global.
-    - Remove global option `context`.
-    - Add global option `encoding`.
-    - Use `browser` option instead of `browserify` option.

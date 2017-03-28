@@ -1,108 +1,118 @@
-const
-    path = require('path'),
-    fs = require('fs'),
-    yaml = require('js-yaml'),
-    _ = require('lodash'),
-    hogan = require('hogan.js'),
-    mkpath = require('mkpath'),
-    execSync = require('child_process').execSync,
+const path = require('path');
+const fs = require('fs');
+const execSync = require('child_process').execSync;
 
-    REQUEST_TPL = path.join(__dirname, 'lib', 'request.tpl.js'),
-    API_TPL = path.join(__dirname, 'lib', 'api.tpl.js'),
+const yaml = require('js-yaml');
+const _ = require('lodash');
+const hogan = require('hogan.js');
+const mkpath = require('mkpath');
 
-    DEFAULT_OPTIONS = {
-        lang: 'english',
-        module: 'commonjs',
-        browser: false,
-        encoding: 'utf8'
-    },
-    DEFAULT_API_CONFIG = {
-        isSuccess: {},
-        ignoreResponse: false,
-        timeout: 5000,
-        success: [],
-        fail: [],
-        needs: [],
-        promise: 'Promise',
-        type: 'get',
-        cache: 'default',
-        mode: 'same-origin',
-        credentials: 'same-origin'
-    };
+const REQUEST_TPL = path.join(__dirname, 'lib', 'request.tpl.js');
+const API_TPL = path.join(__dirname, 'lib', 'api.tpl.js');
+
+const DEFAULT_OPTIONS = {
+	lang: 'english',
+	module: 'commonjs',
+	browser: false,
+	encoding: 'utf8'
+};
+const DEFAULT_API_CONFIG = {
+	isSuccess: {},
+	ignoreResponse: false,
+	timeout: 5000,
+	success: [],
+	fail: [],
+	needs: [],
+	promise: 'Promise',
+	type: 'get',
+	cache: 'default',
+	mode: 'same-origin',
+	credentials: 'same-origin'
+};
 
 const readFile = (s, u = 'utf8') => fs.readFileSync(s, u);
 
 module.exports = options => {
-    options = _.extend(DEFAULT_OPTIONS, options);
+	options = _.extend(DEFAULT_OPTIONS, options);
 
-    var pwd = path.dirname(process.mainModule.filename),
-        inputFilePath = path.isAbsolute(options.target) ? options.target : path.join(pwd, options.target),
+	const pwd = path.dirname(process.mainModule.filename);
+	const inputFilePath = path.isAbsolute(options.target) ? options.target : path.join(pwd, options.target);
 
-        reqTpl = hogan.compile(readFile(REQUEST_TPL)),
-        apiTpl = hogan.compile(readFile(API_TPL)),
-        lang = (() => {
-            var file = options.lang.toLowerCase(),
-                filePath = path.join(__dirname, 'lang', `${file}.yml`);
+	const reqTpl = hogan.compile(readFile(REQUEST_TPL));
+	const apiTpl = hogan.compile(readFile(API_TPL));
 
-            if (!fs.existsSync(filePath)) {
-                throw new Error(`Don't support language: ${file}. Welcome PR >.<`);
-            }
+	const userConfig = yaml.safeLoad(readFile(inputFilePath, options.encoding));
+	const config = _.extend(DEFAULT_API_CONFIG, userConfig.config);
 
-            return yaml.safeLoad(readFile(filePath));
-        })(),
+	const errMsg = (() => {
+		const file = options.lang.toLowerCase();
+		const filePath = path.join(__dirname, 'lang', `${file}.yml`);
 
-        userConfig = yaml.safeLoad(readFile(inputFilePath, options.encoding)),
-        config = _.extend(DEFAULT_API_CONFIG, userConfig.config);
+		if (!fs.existsSync(filePath)) {
+			throw new Error(`Don't support language: ${file}. Welcome PR >.<`);
+		}
 
-    reqTpl = reqTpl.render(_.extend({
-        promise: config.promise,
-        userConfig: JSON.stringify({
-            ignoreResponse: config.ignoreResponse
-        }),
-        apiList: userConfig.api.map(api => (api = _.assignIn({}, config, api), apiTpl.render({
-            isCommonJS: options.module === 'commonjs',
-            name: api.name,
-            promise: config.promise,
-            needs: JSON.stringify(api.needs),
-            url: api.url,
-            type: api.type,
-            mode: api.mode,
-            cache: api.cache,
-            credentials: api.credentials,
-            timeout: api.timeout,
-            isSuccess: JSON.stringify(api.isSuccess),
-            successParam: JSON.stringify(config.success.concat(api.success)),
-            failParam: JSON.stringify(config.fail.concat(api.fail)),
-        }))).join('')
-    }, lang));
+		return _.extend(yaml.safeLoad(readFile(filePath)), config.errorMessage);
+	})();
 
-    options.browser && options.browser !== 'false' && (() => {
-        var tmpFile = './_.api.generator.tmp';
+	let res;
 
-        fs.writeFileSync(tmpFile, reqTpl);
+	// Render html
+	res = reqTpl.render(_.extend({
+		promise: config.promise,
+		userConfig: JSON.stringify({
+			ignoreResponse: config.ignoreResponse
+		}),
+		apiList: userConfig.api.map(api => {
+			api = _.assignIn({}, config, api);
 
-        ({
-            commonjs: () => {
-                execSync(path.join(__dirname, 'node_modules/.bin/browserify') + ` -r ${tmpFile}:${options.browser} > ${tmpFile}2`);
-            },
-            es2015: () => {
-                execSync(path.join(__dirname, 'node_modules/.bin/rollup') + ` -o ${tmpFile}2 -f iife -n ${options.browser} -- ${tmpFile}`);
-            }
-        })[options.module]();
+			return apiTpl.render({
+				isCommonJS: options.module === 'commonjs',
+				name: api.name,
+				promise: config.promise,
+				needs: JSON.stringify(api.needs),
+				url: api.url,
+				type: api.type,
+				mode: api.mode,
+				cache: api.cache,
+				credentials: api.credentials,
+				timeout: api.timeout,
+				isSuccess: JSON.stringify(api.isSuccess),
+				successParam: JSON.stringify(config.success.concat(api.success)),
+				failParam: JSON.stringify(config.fail.concat(api.fail))
+			});
+		}).join('')
+	}, errMsg));
 
-        reqTpl = readFile(`${tmpFile}2`);
-        fs.unlinkSync(tmpFile);
-        fs.unlinkSync(`${tmpFile}2`);
-    })();
+	// Do browserify
+	options.browser && options.browser !== 'false' && (() => {
+		const TMP_FILE_PATH = './_.api.generator.tmp';
 
-    if (options.outputFile) {
-        let targetPath = path.isAbsolute(options.outputFile) ? options.outputFile : path.join(pwd, options.outputFile);
+		fs.writeFileSync(TMP_FILE_PATH, res);
 
-        mkpath.sync(path.parse(targetPath).dir);
-        fs.writeFileSync(targetPath, reqTpl, {
-            encoding: options.encoding
-        });
-    }
+		({
+			commonjs: () => {
+				execSync(path.join(__dirname, 'node_modules/.bin/browserify') + ` -r ${TMP_FILE_PATH}:${options.browser} > ${TMP_FILE_PATH}2`);
+			},
+			es2015: () => {
+				execSync(path.join(__dirname, 'node_modules/.bin/rollup') + ` -o ${TMP_FILE_PATH}2 -f iife -n ${options.browser} -- ${TMP_FILE_PATH}`);
+			}
+		})[options.module]();
 
-    return reqTpl;
+		res = readFile(`${TMP_FILE_PATH}2`);
+		fs.unlinkSync(TMP_FILE_PATH);
+		fs.unlinkSync(`${TMP_FILE_PATH}2`);
+	})();
+
+	// Output file
+	if (options.outputFile) {
+		const targetPath = path.isAbsolute(options.outputFile) ? options.outputFile : path.join(pwd, options.outputFile);
+
+		mkpath.sync(path.parse(targetPath).dir);
+		fs.writeFileSync(targetPath, res, {
+			encoding: options.encoding
+		});
+	}
+
+	return res;
 };

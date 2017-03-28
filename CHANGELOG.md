@@ -1,0 +1,30 @@
+- Ver 1.7.0
+	- Add `errorMessage` option as custom error message which will overwrite default error message.
+	- Use xo instead of eslint for dev js lint.
+- Ver 1.6.0
+    - Throw response instead of msg when status is not 200.
+- Ver 1.5.0
+    - Support type check for `needs` data. See [detail](#needs-array--object).
+- Ver 1.4.0
+    - Support variables in url whose value comes from data object.
+- Ver 1.3.0
+    - Support `timeout` for fetch.
+    - The output for `es2015` module option is in es2015 syntax now.
+    - Remove `uglify` option. You should do uglify yourself if you want.
+- Ver 1.2.1
+    - Auto create dir when output path not exists.
+- Ver 1.2.0
+    - Support request data for GET method.
+- Ver 1.1.0
+    - Add `cache` option.
+- Ver 1.0.2
+    - Fix `TypeMismatch` error in edge.
+- Ver 1.0.1
+    - Fix use URLSearchParams work with [fetch polyfill](https://github.com/github/fetch).
+- Ver 1.0.0
+    - Use [fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) instead of XMLHttpRequest.
+    - Remove global option `jQuery`.
+    - Put `isSuccess` option to every api not only global.
+    - Remove global option `context`.
+    - Add global option `encoding`.
+    - Use `browser` option instead of `browserify` option.

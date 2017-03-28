@@ -1,6 +1,6 @@
 {
   "name": "js-api-generator",
-  "version": "1.6.0",
+  "version": "1.7.0",
   "description": "Generate api module from config file.",
   "main": "main.js",
   "scripts": {
@@ -33,7 +33,17 @@
     "rollup": "^0.41.6"
   },
   "devDependencies": {
-    "eslint": "^3.18.0",
-    "npm-check-updates": "^2.10.4"
+    "npm-check-updates": "^2.10.4",
+    "xo": "^0.18.1"
+  },
+  "xo": {
+	  "rules": {
+		  "no-unused-expressions": [
+			  "error",
+			  {
+				"allowShortCircuit": true
+			  }
+		  ]
+	  }
   }
 }
