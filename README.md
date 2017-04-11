@@ -1,8 +1,11 @@
 # js-api-generator
 
-[![Build Status](https://travis-ci.org/poppinlp/js-api-generator.png?branch=master)](https://travis-ci.org/poppinlp/js-api-generator)
-[![Dependency Status](https://david-dm.org/poppinlp/js-api-generator.svg)](https://david-dm.org/poppinlp/js-api-generator)
-[![devDependency Status](https://david-dm.org/poppinlp/js-api-generator/dev-status.svg)](https://david-dm.org/poppinlp/js-api-generator#info=devDependencies)
+[![Build Status][ci-img]][ci-url]
+[![Dependency Status][dep-img]][dep-url]
+[![Dev Dependency Status][dev-dep-img]][dev-dep-url]
+[![NPM version][npm-ver-img]][npm-url]
+[![NPM downloads][npm-dl-img]][npm-url]
+[![NPM license][npm-lc-img]][npm-url]
 
 Generate module for API requesting:
 
@@ -332,3 +335,18 @@ var result = api({
 ## Demo
 
 See `./test/api.yml`.
+
+
+[ci-img]:https://img.shields.io/travis/poppinlp/js-api-generator.svg?style=flat-square
+[ci-url]:https://travis-ci.org/poppinlp/js-api-generator
+
+[dep-img]:https://img.shields.io/david/poppinlp/js-api-generator.svg?style=flat-square
+[dep-url]:https://david-dm.org/poppinlp/js-api-generator
+
+[dev-dep-img]:https://img.shields.io/david/dev/poppinlp/js-api-generator.svg?style=flat-square
+[dev-dep-url]:https://david-dm.org/poppinlp/js-api-generator#info=devDependencies
+
+[npm-ver-img]:https://img.shields.io/npm/v/js-api-generator.svg?style=flat-square
+[npm-dl-img]:https://img.shields.io/npm/dt/js-api-generator.svg?style=flat-square
+[npm-lc-img]:https://img.shields.io/npm/l/js-api-generator.svg?style=flat-square
+[npm-url]:https://www.npmjs.com/package/js-api-generator
