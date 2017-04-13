@@ -347,6 +347,6 @@ See `./test/api.yml`.
 [dev-dep-url]:https://david-dm.org/poppinlp/js-api-generator#info=devDependencies
 
 [npm-ver-img]:https://img.shields.io/npm/v/js-api-generator.svg?style=flat-square
-[npm-dl-img]:https://img.shields.io/npm/dt/js-api-generator.svg?style=flat-square
+[npm-dl-img]:https://img.shields.io/npm/dm/js-api-generator.svg?style=flat-square
 [npm-lc-img]:https://img.shields.io/npm/l/js-api-generator.svg?style=flat-square
 [npm-url]:https://www.npmjs.com/package/js-api-generator
