@@ -36,7 +36,7 @@
     - Use `browser` option instead of `browserify` option.
 
 [opt-headers]:https://github.com/poppinlp/js-api-generator#headers-object
-[opt-dataType]:https://github.com/poppinlp/js-api-generator#dataType-string
+[opt-dataType]:https://github.com/poppinlp/js-api-generator#datatype-string
 [opt-needs]:https://github.com/poppinlp/js-api-generator#needs-array--object
 [fetch-polyfill]:https://github.com/github/fetch
 [fetch-api]:https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API
