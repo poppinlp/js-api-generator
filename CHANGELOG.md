@@ -1,3 +1,5 @@
+- Ver 1.8.1
+	- Fix check param bug.
 - Ver 1.8.0
 	- Add `headers` option to add custom request headers. See [detail][opt-headers].
 	- Add `dataType` option to format passed data. See [detail][opt-dataType].
