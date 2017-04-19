@@ -91,27 +91,32 @@ The url for requesting.
 
 The method name for this api in generated module.
 
+#### method {String}
+
+The request method such as `post`. Ignore case.
+
 #### type {String}
 
-The request type such as `post`. Ignore upper or lower case.
+The alias for `method`. [DEPRECATED]
 
-#### needs {Array | Object}
+#### needs {Object | Array}
 
-Default: `[]`
+Default: `{}`
 
-If this is an array, strings in it will be used as property name to check existent and not empty in request data.
+If this is an array, strings in it will be used as property name to check existent and not empty in request data. [DEPRECATED]
 
-If this is an object, the key will be used as property name and the value as variable type(or type list) for data check.
-
-Support variable type check list:
+If this is an object, the key will be used as property name and the value as variable type(or type list) for data check. `Any` will be used if can't match any option. Supported variable type check list:
 
 - String
 - Number
 - Boolean
-- Null
 - Array
+- Blob
 - Object
+- Null
 - Any
+
+If any key is end with `?`, property name won't include the `?` and this key will be treated as optional.
 
 #### timeout {Number}
 
@@ -136,7 +141,7 @@ the request url will be added a query string automatically like what jQuery ajax
 
 Use to determine success or fail for requesting.
 
-- success: there is a same key-value pair in response object for every key-value pair in this object
+- success: response object must has same key-value pair for every key-value pair in this object
 - fail: any mismatch
 
 #### success {Array}
@@ -146,6 +151,31 @@ Use to constitute a callback param when success.
 #### fail {Array}
 
 Use to constitute a callback param when fail.
+
+#### headers {Object}
+
+Use to add custom request headers. Such as `X-Requested-With`.
+
+#### dataType {String}
+
+Use to construct data for request body. Ignore case. `Origin` will be used if can't match any option. Supported type list:
+
+##### URLSearchParams
+
+Use [URLSearchParams](https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams) to construct passed in data.
+Maybe you need [this polyfill](https://github.com/poppinlp/simple-url-search-params) for IE.
+
+This option will set `Content-Type` to `application/x-www-form-urlencoded` for request header automatically.
+
+##### FormData
+
+Use [FormData](https://developer.mozilla.org/en-US/docs/Web/API/FormData) to construct passed in data.
+
+This option will set `Content-Type` to `multipart/form-data` for request header automatically.
+
+##### Origin
+
+Won't do anything for passed in data.
 
 ### config
 
@@ -207,7 +237,7 @@ For all api. Will be extended by `api.fail`.
 
 #### ignoreResponse {Boolean}
 
-Default: `false`.
+Default: `false`
 
 If response dose not have param which success or fail need, whether to throw an error or not.
 
@@ -215,54 +245,74 @@ If response dose not have param which success or fail need, whether to throw an 
 
 The error message you supply will overwrite default error message by same name.
 
+#### headers {Object}
+
+Default: `{
+	'Accept': 'application/json, */*; q=0.01',
+	'Accept-Charset': 'utf-8'
+}`
+
+For all api. Will be extended by `api.headers`.
+
+#### dataType {String}
+
+Default: `Origin`
+
+For all api. Will be extended by `api.dataType`.
+
 ### Config File Example
 
 ```yml
 api:
 -
-    url: //www.123.com/test/test1
-    type: put
-    name: createAlgorithm
-    mode: 'cors'
-    needs:
-        - username
-        - displayName
-    success:
-        - algorithmId
-        - updateTime
+  url: //www.123.com/test/test1
+  type: put
+  name: createAlgorithm
+  mode: 'cors'
+  needs:
+    username: String
+    nickname?: String
+  success:
+    - algorithmId
+    - updateTime
 -
-    url: /test/test2
-    type: delete
-    name: checkLogin
-    cache: 'no-cache'
-    timeout: 10000
-    needs:
-        - test
-    success:
-        - username
-        - avatar
+  url: /test/test2
+  type: delete
+  name: checkLogin
+  cache: 'no-cache'
+  timeout: 10000
+  needs:
+    test: Boolean
+  success:
+    - username
+    - avatar
 -
-    url: /test/test3
-    type: post
-    name: editUser
-    isSuccess:
-        status: true
-    needs:
-        username: String
-        id: Number
+  url: /test/test3
+  type: post
+  name: editUser
+  isSuccess:
+    status: true
+  needs:
+    username: String
+    id:
+		- Number
+		- String
 -
-    url: /test/:sid/:pid
-    type: get
-    name: getPt
-    needs:
-        - sid
-        - pid
+  url: /test/:sid/:pid
+  type: get
+  name: getPt
+  needs:
+    sid: Number
+    pid?: Number
 config:
-    isSuccess:
-        code: 0
-    ignoreResponse: false
-    fail:
-        - message
+  isSuccess:
+    code: 0
+  ignoreResponse: false
+  headers: {
+    Content-Type: application/x-www-form-urlencoded
+  }
+  fail:
+    - message
 ```
 
 ## About This Package
@@ -329,8 +379,8 @@ var result = api({
 
 |		| Chrome | Firefox | Edge | IE | Opera | Safari |
 | ----- | ------ | ------- | ---- | -- | ----- | ------ |
-| Output file | 45.0 | 22.0 | Yes | No support | 32	| 10.0 |
-| Compile with babel or buble | Yes | Yes | Yes | Yes | Yes | Yes |
+| Output file | 45.0 | 22.0 | Yes | Not support | 32	| 10.0 |
+| Compile with babel or buble | Yes | Yes | Yes | Depends on polyfill | Yes | Yes |
 
 ## Demo
 

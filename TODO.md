@@ -1,1 +1,3 @@
 - Update test script
+- Add option for header content type
+- Support more body such as FormData

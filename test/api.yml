@@ -1,45 +1,53 @@
 api:
 -
-    url: //www.123.com/test/test1
-    type: put
-    name: createAlgorithm
-    mode: 'cors'
-    needs:
-        - username
-        - displayName
-    success:
-        - algorithmId
-        - updateTime
+  url: //www.123.com/test/test1
+  method: put
+  name: createAlgorithm
+  mode: 'cors'
+  dataType: URLSearchParams
+  needs:
+    username: String
+    nickname?: String
+  success:
+    - algorithmId
+    - updateTime
 -
-    url: /test/test2
-    type: delete
-    name: checkLogin
-    cache: 'no-cache'
-    timeout: 10000
-    needs:
-        - test
-    success:
-        - username
-        - avatar
+  url: /test/test2
+  method: delete
+  name: checkLogin
+  cache: 'no-cache'
+  timeout: 10000
+  dataType: FormData
+  needs:
+    test: Boolean
+  success:
+    - username
+    - avatar
 -
-    url: /test/test3
-    type: post
-    name: editUser
-    isSuccess:
-        status: true
-    needs:
-        username: String
-        id: Number
+  url: /test/test3
+  method: post
+  name: editUser
+  dataType: Origin
+  isSuccess:
+    status: true
+  needs:
+    username: String
+    id:
+      - Number
+      - String
 -
-    url: /test/:sid/:pid
-    type: get
-    name: getPt
-    needs:
-        - sid
-        - pid
+  url: /test/:sid/:pid
+  method: get
+  name: getPt
+  needs:
+    sid: Number
+    pid?: Number
 config:
-    isSuccess:
-        code: 0
-    ignoreResponse: false
-    fail:
-        - message
+  isSuccess:
+    code: 0
+  ignoreResponse: false
+  headers: {
+    Content-Type: application/x-www-form-urlencoded
+  }
+  fail:
+    - message

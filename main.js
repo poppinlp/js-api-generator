@@ -22,18 +22,24 @@ const DEFAULT_API_CONFIG = {
 	timeout: 5000,
 	success: [],
 	fail: [],
-	needs: [],
+	needs: {},
 	promise: 'Promise',
+	method: 'get',
 	type: 'get',
 	cache: 'default',
 	mode: 'same-origin',
-	credentials: 'same-origin'
+	credentials: 'same-origin',
+	headers: {
+		Accept: 'application/json, */*; q=0.01',
+		'Accept-Charset': 'utf-8'
+	},
+	dataType: 'Origin'
 };
 
 const readFile = (s, u = 'utf8') => fs.readFileSync(s, u);
 
 module.exports = options => {
-	options = _.extend(DEFAULT_OPTIONS, options);
+	options = _.assignIn({}, DEFAULT_OPTIONS, options);
 
 	const pwd = path.dirname(process.mainModule.filename);
 	const inputFilePath = path.isAbsolute(options.target) ? options.target : path.join(pwd, options.target);
@@ -42,7 +48,7 @@ module.exports = options => {
 	const apiTpl = hogan.compile(readFile(API_TPL));
 
 	const userConfig = yaml.safeLoad(readFile(inputFilePath, options.encoding));
-	const config = _.extend(DEFAULT_API_CONFIG, userConfig.config);
+	const config = _.assignIn({}, DEFAULT_API_CONFIG, userConfig.config);
 
 	const errMsg = (() => {
 		const file = options.lang.toLowerCase();
@@ -52,13 +58,13 @@ module.exports = options => {
 			throw new Error(`Don't support language: ${file}. Welcome PR >.<`);
 		}
 
-		return _.extend(yaml.safeLoad(readFile(filePath)), config.errorMessage);
+		return _.assignIn({}, yaml.safeLoad(readFile(filePath)), config.errorMessage);
 	})();
 
 	let res;
 
 	// Render html
-	res = reqTpl.render(_.extend({
+	res = reqTpl.render(_.assignIn({}, {
 		promise: config.promise,
 		userConfig: JSON.stringify({
 			ignoreResponse: config.ignoreResponse
@@ -72,14 +78,16 @@ module.exports = options => {
 				promise: config.promise,
 				needs: JSON.stringify(api.needs),
 				url: api.url,
-				type: api.type,
+				method: api.method || api.type,
 				mode: api.mode,
 				cache: api.cache,
 				credentials: api.credentials,
 				timeout: api.timeout,
 				isSuccess: JSON.stringify(api.isSuccess),
 				successParam: JSON.stringify(config.success.concat(api.success)),
-				failParam: JSON.stringify(config.fail.concat(api.fail))
+				failParam: JSON.stringify(config.fail.concat(api.fail)),
+				headers: JSON.stringify(api.headers),
+				dataType: api.dataType.toLowerCase()
 			});
 		}).join('')
 	}, errMsg));
