@@ -2,6 +2,7 @@
 	- Add `headers` option to add custom request headers. See [detail][opt-headers].
 	- Add `dataType` option to format passed data. See [detail][opt-dataType].
 	- Add `method` option as a alias for `type`.
+	- `needs` data would be optional if it ends with `?`.
 	- Deprecated `type` option. Will be removed in 2.0.0.
 	- Deprecated array for `needs` option. Will be removed in 2.0.0.
 - Ver 1.7.0
