@@ -1,3 +1,5 @@
+- Ver 1.9.0
+	- Add `JSON` format for `dataType` option.
 - Ver 1.8.2
 	- Fix check param bug.
 - Ver 1.8.0

@@ -173,6 +173,12 @@ Use [FormData](https://developer.mozilla.org/en-US/docs/Web/API/FormData) to con
 
 This option will set `Content-Type` to `multipart/form-data` for request header automatically.
 
+##### JSON
+
+This option will stringify passed in data to a JSON string by [`JSON.stringify`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify).
+
+This option will set `Content-Type` to `text/json` for request header automatically.
+
 ##### Origin
 
 Won't do anything for passed in data.
