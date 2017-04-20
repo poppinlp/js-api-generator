@@ -1,3 +1,5 @@
+- Ver 1.9.2
+    - Force add `x-www-form-urlencoded` for `URLSearchParams` body.
 - Ver 1.9.1
 	- Add `JSON` format for `dataType` option.
 - Ver 1.8.2

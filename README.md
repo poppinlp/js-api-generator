@@ -165,19 +165,19 @@ Use to construct data for request body. Ignore case. `Origin` will be used if ca
 Use [URLSearchParams](https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams) to construct passed in data.
 Maybe you need [this polyfill](https://github.com/poppinlp/simple-url-search-params) for IE.
 
-This option will set `Content-Type` to `application/x-www-form-urlencoded` for request header automatically.
+This package will set `Content-Type` to `application/x-www-form-urlencoded` for request header automatically since some browser don't support `URLSearchParams` and they won't add that header even if you use `URLSearchParams` polyfill. You could overwrite it by `headers` option.
 
 ##### FormData
 
 Use [FormData](https://developer.mozilla.org/en-US/docs/Web/API/FormData) to construct passed in data.
 
-This option will set `Content-Type` to `multipart/form-data` for request header automatically.
+Browser will set `Content-Type` to `multipart/form-data` for request header automatically.
 
 ##### JSON
 
 This option will stringify passed in data to a JSON string by [`JSON.stringify`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify).
 
-This option will set `Content-Type` to `application/json` for request header automatically.
+This package will set `Content-Type` to `application/json` instead of `text/plain` for request header automatically since browser won't do that. You could overwrite it by `headers` option.
 
 ##### Origin
 
