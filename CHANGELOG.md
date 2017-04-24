@@ -1,3 +1,5 @@
+- Ver 1.9.3
+    - Do `toString` for `URLSearchParams` when chrome version under 47.
 - Ver 1.9.2
     - Force add `x-www-form-urlencoded` for `URLSearchParams` body.
 - Ver 1.9.1
