@@ -303,8 +303,8 @@ api:
   needs:
     username: String
     id:
-	  - Number
-	  - String
+      - Number
+      - String
 -
   url: /test/:sid/:pid
   type: get
