@@ -85,7 +85,9 @@ Provide api list. Each api could have follow options:
 
 #### url {String}
 
-The url for requesting.
+The url for requesting. Support dynamic url which means you could use variable in url link.
+
+If the config url is `/user/:uid` and you call this API by `{uid: 123}`, the request url will be `/user/123`.
 
 #### name {String}
 
@@ -301,8 +303,8 @@ api:
   needs:
     username: String
     id:
-		- Number
-		- String
+	  - Number
+	  - String
 -
   url: /test/:sid/:pid
   type: get
