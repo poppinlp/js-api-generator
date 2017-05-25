@@ -1,6 +1,6 @@
 {
 	"name": "js-api-generator",
-	"version": "1.9.4",
+	"version": "2.0.0",
 	"description": "Generate api module from config file.",
 	"main": "main.js",
 	"scripts": {
@@ -34,6 +34,7 @@
 		"rollup": "^0.41.6"
 	},
 	"devDependencies": {
+		"ava": "^0.19.1",
 		"npm-check-updates": "^2.11.2",
 		"xo": "^0.18.2"
 	},

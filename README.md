@@ -12,7 +12,9 @@ Generate module for API requesting:
 - follow CommonJS specification or ES2015
 - from easy config file
 - with Promise returned
-- by XMLHttpRequest or fetch API (Current version use fetch API to request. Wish to use XMLHttpRequest? See [tag 0.2.4](https://github.com/poppinlp/js-api-generator/tree/v0.2.4))
+- by XMLHttpRequest or fetch API since 2.0.0
+	- Wish only XMLHttpRequest? See [tag 0.2.4](https://github.com/poppinlp/js-api-generator/tree/v0.2.4))
+	- Wish only fetch? See [tag 1.9.4](https://github.com/poppinlp/js-api-generator/tree/v1.9.4))
 - builtin browserify and rollup
 - e.t.c
 
@@ -91,8 +93,13 @@ If the config url is `/user/:uid` and you call this API by `{uid: 123}`, the req
 
 #### rootUrl {String}
 
-The global prefix should set at `config.rootUrl`.
+The global prefix should should set at `config.rootUrl`.
 This `api.rootUrl` option is used to cover that in some case.
+
+#### requestBy {String}
+
+The global request tool should set at `config.requestBy`.
+This `api.requestBy` option is used to cover that in some case.
 
 #### name {String}
 
@@ -194,6 +201,13 @@ Won't do anything for passed in data and pass it through to fetch body.
 
 Provide global options. Could have follow options:
 
+#### requestBy {String}
+
+Default: `fetch`
+
+Define tool for send request. Support `fetch` and `ajax`.
+For all api. Will be covered by `api.requestBy`.
+
 #### promise {String}
 
 Default: `Promise`
@@ -284,7 +298,7 @@ Default: `''`
 
 Set prefix for `api.url`. For all api. Will be covered by `api.rootUrl`.
 
-### Config File Example
+### Config Sample
 
 ```yml
 api:
@@ -401,15 +415,16 @@ var result = api({
 
 ## Browser Compatibility
 
-|		| Chrome | Firefox | Edge | IE | Opera | Safari |
-| ----- | ------ | ------- | ---- | -- | ----- | ------ |
-| Output file | 45.0 | 22.0 | Yes | Not support | 32	| 10.0 |
-| Compile with babel or buble | Yes | Yes | Yes | Depends on polyfill | Yes | Yes |
+|															| Chrome 	| Firefox | Edge 	| IE 									| Opera | Safari	|
+|-														|-				|-				|-			|-										|-			|-				|
+| Output file									| 45.0		| 22.0 		| Yes 	| Not support 				| 32		| 10.0		|
+| Compile with babel or buble | Yes			| Yes 		| Yes 	| Depends on polyfill | Yes		| Yes			|
 
-## Demo
+## Test
 
-See `./test/api.yml`.
-
+```shell
+npm test
+```
 
 [ci-img]:https://img.shields.io/travis/poppinlp/js-api-generator.svg?style=flat-square
 [ci-url]:https://travis-ci.org/poppinlp/js-api-generator

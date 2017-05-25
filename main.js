@@ -7,7 +7,8 @@ const _ = require('lodash');
 const hogan = require('hogan.js');
 const mkpath = require('mkpath');
 
-const REQUEST_TPL = path.join(__dirname, 'lib', 'request.tpl.js');
+const FETCH_TPL = path.join(__dirname, 'lib', 'fetch.tpl.js');
+const AJAX_TPL = path.join(__dirname, 'lib', 'ajax.tpl.js');
 const API_TPL = path.join(__dirname, 'lib', 'api.tpl.js');
 
 const DEFAULT_OPTIONS = {
@@ -45,7 +46,7 @@ module.exports = options => {
 	const pwd = path.dirname(process.mainModule.filename);
 	const inputFilePath = path.isAbsolute(options.target) ? options.target : path.join(pwd, options.target);
 
-	const reqTpl = hogan.compile(readFile(REQUEST_TPL));
+	const reqTpl = hogan.compile(readFile(FETCH_TPL));
 	const apiTpl = hogan.compile(readFile(API_TPL));
 
 	const userConfig = yaml.safeLoad(readFile(inputFilePath, options.encoding));
