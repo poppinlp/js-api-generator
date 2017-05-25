@@ -1,49 +1,50 @@
 {
-  "name": "js-api-generator",
-  "version": "1.9.3",
-  "description": "Generate api module from config file.",
-  "main": "main.js",
-  "scripts": {
-    "test": "node ./test/test.js",
-    "upDep": "./node_modules/.bin/npm-check-updates -ua"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/poppinlp/js-api-generator.git"
-  },
-  "keywords": [
-    "js",
-    "api",
-    "generator",
-    "request",
-    "fetch"
-  ],
-  "author": "PoppinL",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/poppinlp/js-api-generator/issues"
-  },
-  "homepage": "https://github.com/poppinlp/js-api-generator#readme",
-  "dependencies": {
-    "browserify": "^14.3.0",
-    "hogan.js": "^3.0.2",
-    "js-yaml": "^3.8.3",
-    "lodash": "^4.17.4",
-    "mkpath": "^1.0.0",
-    "rollup": "^0.41.6"
-  },
-  "devDependencies": {
-    "npm-check-updates": "^2.11.0",
-    "xo": "^0.18.1"
-  },
-  "xo": {
-	  "rules": {
-		  "no-unused-expressions": [
-			  "error",
-			  {
-				"allowShortCircuit": true
-			  }
-		  ]
-	  }
-  }
+	"name": "js-api-generator",
+	"version": "1.9.4",
+	"description": "Generate api module from config file.",
+	"main": "main.js",
+	"scripts": {
+		"test": "node ./test/test.js",
+		"upDep": "./node_modules/.bin/npm-check-updates -ua"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/poppinlp/js-api-generator.git"
+	},
+	"keywords": [
+		"js",
+		"api",
+		"generator",
+		"request",
+		"fetch",
+		"ajax"
+	],
+	"author": "PoppinL",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/poppinlp/js-api-generator/issues"
+	},
+	"homepage": "https://github.com/poppinlp/js-api-generator#readme",
+	"dependencies": {
+		"browserify": "^14.3.0",
+		"hogan.js": "^3.0.2",
+		"js-yaml": "^3.8.4",
+		"lodash": "^4.17.4",
+		"mkpath": "^1.0.0",
+		"rollup": "^0.41.6"
+	},
+	"devDependencies": {
+		"npm-check-updates": "^2.11.2",
+		"xo": "^0.18.2"
+	},
+	"xo": {
+		"rules": {
+			"no-unused-expressions": [
+				"error",
+				{
+					"allowShortCircuit": true
+				}
+			]
+		}
+	}
 }

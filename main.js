@@ -17,6 +17,7 @@ const DEFAULT_OPTIONS = {
 	encoding: 'utf8'
 };
 const DEFAULT_API_CONFIG = {
+	rootUrl: '',
 	isSuccess: {},
 	ignoreResponse: false,
 	timeout: 5000,
@@ -73,6 +74,7 @@ module.exports = options => {
 			api = _.assignIn({}, config, api);
 
 			return apiTpl.render({
+				rootUrl: api.rootUrl,
 				isCommonJS: options.module === 'commonjs',
 				name: api.name,
 				promise: config.promise,

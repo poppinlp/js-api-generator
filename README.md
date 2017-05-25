@@ -89,6 +89,11 @@ The url for requesting. Support dynamic url which means you could use variable i
 
 If the config url is `/user/:uid` and you call this API by `{uid: 123}`, the request url will be `/user/123`.
 
+#### rootUrl {String}
+
+The global prefix should set at `config.rootUrl`.
+This `api.rootUrl` option is used to cover that in some case.
+
 #### name {String}
 
 The method name for this api in generated module.
@@ -183,7 +188,7 @@ This package will set `Content-Type` to `application/json` instead of `text/plai
 
 ##### Origin
 
-Won't do anything for passed in data.
+Won't do anything for passed in data and pass it through to fetch body.
 
 ### config
 
@@ -191,31 +196,36 @@ Provide global options. Could have follow options:
 
 #### promise {String}
 
-Default: `Promise`.
+Default: `Promise`
 
 The global promise object in your environment.
 
+#### method {String}
+
+Default: `get`
+
+The request method such as `post`. Ignore case.
+For all api. Will be covered by `api.type`.
+
 #### type {String}
 
-Default: `get`.
-
-For all api. Will be covered by `api.type`.
+The alias for `method`. [DEPRECATED]
 
 #### cache {String}
 
-Default: `default`.
+Default: `default`
 
 For all api. Will be covered by `api.cache`.
 
 #### mode {String}
 
-Default: `same-origin`.
+Default: `same-origin`
 
 For all api. Will be covered by `api.mode`.
 
 #### credentials {String}
 
-Default: `same-origin`.
+Default: `same-origin`
 
 For all api. Will be covered by `api.credentials`.
 
@@ -227,7 +237,7 @@ For all api. Will be covered by `api.isSuccess`.
 
 #### timeout {Number}
 
-Default: `5000`.
+Default: `5000`
 
 For all api. Will be covered by `api.timeout`.
 
@@ -266,7 +276,13 @@ For all api. Will be extended by `api.headers`.
 
 Default: `Origin`
 
-For all api. Will be extended by `api.dataType`.
+For all api. Will be covered by `api.dataType`.
+
+#### rootUrl {String}
+
+Default: `''`
+
+Set prefix for `api.url`. For all api. Will be covered by `api.rootUrl`.
 
 ### Config File Example
 

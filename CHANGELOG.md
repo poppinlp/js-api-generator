@@ -1,7 +1,9 @@
+- Ver 1.9.4
+	- Add `rootUrl` option to set prefix path for all api `url`.
 - Ver 1.9.3
-    - Do `toString` for `URLSearchParams` when chrome version under 47.
+  - Do `toString` for `URLSearchParams` when chrome version under 47.
 - Ver 1.9.2
-    - Force add `x-www-form-urlencoded` for `URLSearchParams` body.
+  - Force add `x-www-form-urlencoded` for `URLSearchParams` body.
 - Ver 1.9.1
 	- Add `JSON` format for `dataType` option.
 - Ver 1.8.2
