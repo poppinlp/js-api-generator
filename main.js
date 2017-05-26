@@ -7,8 +7,7 @@ const _ = require('lodash');
 const hogan = require('hogan.js');
 const mkpath = require('mkpath');
 
-const FETCH_TPL = path.join(__dirname, 'lib', 'fetch.tpl.js');
-const AJAX_TPL = path.join(__dirname, 'lib', 'ajax.tpl.js');
+const REQUEST_TPL = path.join(__dirname, 'lib', 'request.tpl.js');
 const API_TPL = path.join(__dirname, 'lib', 'api.tpl.js');
 
 const DEFAULT_OPTIONS = {
@@ -27,7 +26,6 @@ const DEFAULT_API_CONFIG = {
 	needs: {},
 	promise: 'Promise',
 	method: 'get',
-	type: 'get',
 	cache: 'default',
 	mode: 'same-origin',
 	credentials: 'same-origin',
@@ -46,7 +44,7 @@ module.exports = options => {
 	const pwd = path.dirname(process.mainModule.filename);
 	const inputFilePath = path.isAbsolute(options.target) ? options.target : path.join(pwd, options.target);
 
-	const reqTpl = hogan.compile(readFile(FETCH_TPL));
+	const reqTpl = hogan.compile(readFile(REQUEST_TPL));
 	const apiTpl = hogan.compile(readFile(API_TPL));
 
 	const userConfig = yaml.safeLoad(readFile(inputFilePath, options.encoding));
@@ -81,7 +79,7 @@ module.exports = options => {
 				promise: config.promise,
 				needs: JSON.stringify(api.needs),
 				url: api.url,
-				method: api.method || api.type,
+				method: api.method,
 				mode: api.mode,
 				cache: api.cache,
 				credentials: api.credentials,

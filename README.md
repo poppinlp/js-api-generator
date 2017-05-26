@@ -42,7 +42,9 @@ This part is for generated module.
 - The callback function accepts an object param which content is determined by `success` or `fail` api config.
 - The output module is in ES2015 syntax. You should do [babel](https://babeljs.io/) or [buble](https://buble.surge.sh/) yourself if you want.
 
-### Generated Module Usage Example
+### Generated Module Usage Sample
+
+These are samples for generated module.
 
 #### Node env with CommonJS output
 
@@ -79,7 +81,7 @@ api.yourApiName({
 
 ## About Config File
 
-Config file should be [YAML](http://www.yaml.org/spec/1.2/spec.html) format and should have `api` and `config` object.
+Config file should be [YAML](http://www.yaml.org/spec/1.2/spec.html) format and could have `api` and `config` object.
 
 ### api
 
@@ -109,17 +111,11 @@ The method name for this api in generated module.
 
 The request method such as `post`. Ignore case.
 
-#### type {String}
-
-The alias for `method`. [DEPRECATED]
-
-#### needs {Object | Array}
+#### needs {Object}
 
 Default: `{}`
 
-If this is an array, strings in it will be used as property name to check existent and not empty in request data. [DEPRECATED]
-
-If this is an object, the key will be used as property name and the value as variable type(or type list) for data check. `Any` will be used if can't match any option. Supported variable type check list:
+For all key-value pair, the key will be used as property name and the value as variable type(or type list) for data check. `Any` will be used if can't match any option. Supported variable type check list:
 
 - String
 - Number
@@ -181,6 +177,33 @@ Maybe you need [this polyfill](https://github.com/poppinlp/simple-url-search-par
 
 This package will set `Content-Type` to `application/x-www-form-urlencoded` for request header automatically since some browser don't support `URLSearchParams` and they won't add that header even if you use `URLSearchParams` polyfill. You could overwrite it by `headers` option.
 
+NOTE: This is __NOT__ the normal url-encoded way to serialize params. If you want that please see below.
+
+##### queryString
+
+Use [jquery-like method](http://api.jquery.com/jQuery.param/) to serialize passed in data to url-encoded string.
+
+```js
+// For example:
+
+{ foo: [1, 2, 3], bar: { test: 'string' } }
+
+// will be serialize to
+
+'foo%5B%5D=1&foo%5B%5D=2&foo%5B%5D=3&bar%5Btest%5D=string'
+
+// which parsed like
+
+`
+foo[]:1
+foo[]:2
+foo[]:3
+bar[test]:string
+`
+```
+
+This package will set `Content-Type` to `application/x-www-form-urlencoded` for request header automatically. You could overwrite it by `headers` option.
+
 ##### FormData
 
 Use [FormData](https://developer.mozilla.org/en-US/docs/Web/API/FormData) to construct passed in data.
@@ -219,11 +242,7 @@ The global promise object in your environment.
 Default: `get`
 
 The request method such as `post`. Ignore case.
-For all api. Will be covered by `api.type`.
-
-#### type {String}
-
-The alias for `method`. [DEPRECATED]
+For all api. Will be covered by `api.method`.
 
 #### cache {String}
 
@@ -343,6 +362,7 @@ api:
     sid: Number
     pid?: Number
 config:
+	requestBy: fetch
   isSuccess:
     code: 0
   ignoreResponse: false
@@ -399,7 +419,7 @@ Then you could use generated module in browser like [Generated Module Usage Exam
 
 #### encoding {String}
 
-Default: `utf8`.
+Default: `utf8`
 
 File encoding for config file and output file.
 
@@ -415,10 +435,10 @@ var result = api({
 
 ## Browser Compatibility
 
-|															| Chrome 	| Firefox | Edge 	| IE 									| Opera | Safari	|
-|-														|-				|-				|-			|-										|-			|-				|
-| Output file									| 45.0		| 22.0 		| Yes 	| Not support 				| 32		| 10.0		|
-| Compile with babel or buble | Yes			| Yes 		| Yes 	| Depends on polyfill | Yes		| Yes			|
+||Chrome|Firefox|Edge|IE|Opera|Safari|
+|-|-|-|-|-|-|-|
+|Output file|45.0|22.0|Yes|Not support|32|10.0|
+|Compile with babel or buble |Yes|Yes|Yes|Depends on polyfill|Yes|Yes|
 
 ## Test
 

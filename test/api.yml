@@ -24,6 +24,11 @@ api:
     - username
     - avatar
 -
+  url: /test/test2
+  name: editUser2
+  dataType: queryString
+  requestBy: ajax
+-
   url: /test/test3
   method: post
   name: editUser
@@ -43,6 +48,7 @@ api:
     sid: Number
     pid?: Number
 config:
+  requestBy: fetch
   isSuccess:
     code: 0
   ignoreResponse: false
