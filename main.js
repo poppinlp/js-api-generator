@@ -17,6 +17,7 @@ const DEFAULT_OPTIONS = {
 	encoding: 'utf8'
 };
 const DEFAULT_API_CONFIG = {
+	requestBy: 'fetch',
 	rootUrl: '',
 	isSuccess: {},
 	ignoreResponse: false,
@@ -30,8 +31,7 @@ const DEFAULT_API_CONFIG = {
 	mode: 'same-origin',
 	credentials: 'same-origin',
 	headers: {
-		Accept: 'application/json, */*; q=0.01',
-		'Accept-Charset': 'utf-8'
+		Accept: 'application/json, */*; q=0.01'
 	},
 	dataType: 'Origin'
 };
@@ -73,6 +73,7 @@ module.exports = options => {
 			api = _.assignIn({}, config, api);
 
 			return apiTpl.render({
+				requestBy: api.requestBy,
 				rootUrl: api.rootUrl,
 				isCommonJS: options.module === 'commonjs',
 				name: api.name,
