@@ -1,6 +1,6 @@
 {
 	"name": "js-api-generator",
-	"version": "2.0.0-alpha.2",
+	"version": "2.0.0-alpha.3",
 	"description": "Generate api module from config file.",
 	"main": "main.js",
 	"scripts": {
@@ -26,7 +26,7 @@
 	},
 	"homepage": "https://github.com/poppinlp/js-api-generator#readme",
 	"dependencies": {
-		"browserify": "^14.3.0",
+		"browserify": "^14.4.0",
 		"hogan.js": "^3.0.2",
 		"js-yaml": "^3.8.4",
 		"lodash": "^4.17.4",
@@ -35,17 +35,8 @@
 	},
 	"devDependencies": {
 		"ava": "^0.19.1",
-		"npm-check-updates": "^2.11.2",
-		"xo": "^0.18.2"
-	},
-	"xo": {
-		"rules": {
-			"no-unused-expressions": [
-				"error",
-				{
-					"allowShortCircuit": true
-				}
-			]
-		}
+		"eslint": "^3.19.0",
+		"eslint-config-handsome": "^0.1.5",
+		"npm-check-updates": "^2.11.2"
 	}
 }

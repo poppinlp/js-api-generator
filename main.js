@@ -1,14 +1,15 @@
-const path = require('path');
-const fs = require('fs');
-const execSync = require('child_process').execSync;
+const
+	path = require('path'),
+	fs = require('fs'),
+	execSync = require('child_process').execSync,
 
-const yaml = require('js-yaml');
-const _ = require('lodash');
-const hogan = require('hogan.js');
-const mkpath = require('mkpath');
+	yaml = require('js-yaml'),
+	_ = require('lodash'),
+	hogan = require('hogan.js'),
+	mkpath = require('mkpath'),
 
-const REQUEST_TPL = path.join(__dirname, 'lib', 'request.tpl.js');
-const API_TPL = path.join(__dirname, 'lib', 'api.tpl.js');
+	REQUEST_TPL = path.join(__dirname, 'lib', 'request.tpl.js'),
+	API_TPL = path.join(__dirname, 'lib', 'api.tpl.js');
 
 const DEFAULT_OPTIONS = {
 	lang: 'english',
@@ -16,6 +17,7 @@ const DEFAULT_OPTIONS = {
 	browser: false,
 	encoding: 'utf8'
 };
+
 const DEFAULT_API_CONFIG = {
 	requestBy: 'fetch',
 	rootUrl: '',
