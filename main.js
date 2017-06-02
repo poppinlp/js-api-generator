@@ -71,8 +71,8 @@ module.exports = options => {
 		userConfig: JSON.stringify({
 			ignoreResponse: config.ignoreResponse
 		}),
-		apiList: userConfig.api.map(api => {
-			api = _.assignIn({}, config, api);
+		apiList: userConfig.api.map(userAPI => {
+			const api = _.assignIn({}, config, userAPI);
 
 			return apiTpl.render({
 				requestBy: api.requestBy,
