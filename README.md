@@ -158,9 +158,13 @@ Use to determine success or fail for requesting.
 
 Use to constitute a callback param when success.
 
+__NOTE__: This only works when response is a plain object, otherwise you'll get the whole response.
+
 #### fail {Array}
 
 Use to constitute a callback param when fail.
+
+__NOTE__: This only works when response is a plain object, otherwise you'll get the whole response.
 
 #### headers {Object}
 

@@ -1,6 +1,7 @@
 - Ver 2.0.0 [BREAK CHANGE]
 	- Support `fetch` and `XMLHttpRequest` both
 	- Add `requestBy` option to determine whether request tool to use.
+	- Will return origin response if resposne is not a plain object.
 	- Delete DEPRECATE method in 1.x.
 - Ver 1.9.4
 	- Add `rootUrl` option to set prefix path for all api `url`.
