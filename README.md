@@ -154,15 +154,15 @@ Use to determine success or fail for requesting.
 - success: response object must has same key-value pair for every key-value pair in this object
 - fail: any mismatch
 
-#### success {Array}
+#### success {Object}
 
-Use to constitute a callback param when success.
+Use to constitute a callback param when success. The object should be like what `needs` option expect.
 
 __NOTE__: This only works when response is a plain object, otherwise you'll get the whole response.
 
-#### fail {Array}
+#### fail {Object}
 
-Use to constitute a callback param when fail.
+Use to constitute a callback param when fail. The object should be like what `needs` option expect.
 
 __NOTE__: This only works when response is a plain object, otherwise you'll get the whole response.
 
@@ -278,23 +278,17 @@ Default: `5000`
 
 For all api. Will be covered by `api.timeout`.
 
-#### success {Array}
+#### success {Object}
 
-Default: `[]`
+Default: `{}`
 
 For all api. Will be extended by `api.success`.
 
-#### fail {Array}
+#### fail {Object}
 
-Default: `[]`
+Default: `{}`
 
 For all api. Will be extended by `api.fail`.
-
-#### ignoreResponse {Boolean}
-
-Default: `false`
-
-If response dose not have param which success or fail need, whether to throw an error or not.
 
 #### errorMessage {Object}
 
@@ -327,30 +321,38 @@ Set prefix for `api.url`. For all api. Will be covered by `api.rootUrl`.
 api:
 -
   url: //www.123.com/test/test1
-  type: put
+  method: put
   name: createAlgorithm
   mode: 'cors'
+  dataType: URLSearchParams
   needs:
     username: String
     nickname?: String
   success:
-    - algorithmId
-    - updateTime
+    algorithmId: Number
+    updateTime?: Numer
 -
   url: /test/test2
-  type: delete
+  method: delete
   name: checkLogin
   cache: 'no-cache'
   timeout: 10000
+  dataType: FormData
   needs:
     test: Boolean
   success:
-    - username
-    - avatar
+    username: String
+    avatar: String
+-
+  url: /test/test2
+  name: editUser2
+  dataType: queryString
+  requestBy: ajax
 -
   url: /test/test3
-  type: post
+  method: post
   name: editUser
+  dataType: Origin
   isSuccess:
     status: true
   needs:
@@ -360,21 +362,21 @@ api:
       - String
 -
   url: /test/:sid/:pid
-  type: get
+  method: get
   name: getPt
   needs:
     sid: Number
     pid?: Number
+
 config:
-	requestBy: fetch
+  requestBy: fetch
   isSuccess:
     code: 0
-  ignoreResponse: false
   headers: {
     Content-Type: application/x-www-form-urlencoded
   }
   fail:
-    - message
+    message: String
 ```
 
 ## About This Package

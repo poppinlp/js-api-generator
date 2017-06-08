@@ -9,8 +9,8 @@ api:
     username: String
     nickname?: String
   success:
-    - algorithmId
-    - updateTime
+    algorithmId: Number
+    updateTime?: Numer
 -
   url: /test/test2
   method: delete
@@ -21,8 +21,8 @@ api:
   needs:
     test: Boolean
   success:
-    - username
-    - avatar
+    username: String
+    avatar: String
 -
   url: /test/test2
   name: editUser2
@@ -47,13 +47,13 @@ api:
   needs:
     sid: Number
     pid?: Number
+
 config:
   requestBy: fetch
   isSuccess:
     code: 0
-  ignoreResponse: false
   headers: {
     Content-Type: application/x-www-form-urlencoded
   }
   fail:
-    - message
+    message: String

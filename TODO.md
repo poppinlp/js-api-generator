@@ -1,4 +1,3 @@
-- Support type check for `success` and `fail` list
 - Add cli tool
 - Add test case
 - Add code coverage

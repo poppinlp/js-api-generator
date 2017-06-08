@@ -1,13 +1,15 @@
 const
 	path = require('path'),
 	fs = require('fs'),
-	execSync = require('child_process').execSync,
+	{ execSync } = require('child_process');
 
+const
 	yaml = require('js-yaml'),
 	_ = require('lodash'),
 	hogan = require('hogan.js'),
-	mkpath = require('mkpath'),
+	mkpath = require('mkpath');
 
+const
 	REQUEST_TPL = path.join(__dirname, 'lib', 'request.tpl.js'),
 	API_TPL = path.join(__dirname, 'lib', 'api.tpl.js');
 
@@ -22,7 +24,6 @@ const DEFAULT_API_CONFIG = {
 	requestBy: 'fetch',
 	rootUrl: '',
 	isSuccess: {},
-	ignoreResponse: false,
 	timeout: 5000,
 	success: [],
 	fail: [],
@@ -40,17 +41,18 @@ const DEFAULT_API_CONFIG = {
 
 const readFile = (s, u = 'utf8') => fs.readFileSync(s, u);
 
-module.exports = options => {
-	options = _.assignIn({}, DEFAULT_OPTIONS, options);
+module.exports = userOption => {
+	const
+		options = _.assignIn({}, DEFAULT_OPTIONS, userOption),
 
-	const pwd = path.dirname(process.mainModule.filename);
-	const inputFilePath = path.isAbsolute(options.target) ? options.target : path.join(pwd, options.target);
+		pwd = path.dirname(process.mainModule.filename),
+		inputFilePath = path.isAbsolute(options.target) ? options.target : path.join(pwd, options.target),
 
-	const reqTpl = hogan.compile(readFile(REQUEST_TPL));
-	const apiTpl = hogan.compile(readFile(API_TPL));
+		reqTpl = hogan.compile(readFile(REQUEST_TPL)),
+		apiTpl = hogan.compile(readFile(API_TPL)),
 
-	const userConfig = yaml.safeLoad(readFile(inputFilePath, options.encoding));
-	const config = _.assignIn({}, DEFAULT_API_CONFIG, userConfig.config);
+		userConfig = yaml.safeLoad(readFile(inputFilePath, options.encoding)),
+		config = _.assignIn({}, DEFAULT_API_CONFIG, userConfig.config);
 
 	const errMsg = (() => {
 		const file = options.lang.toLowerCase();
@@ -68,9 +70,6 @@ module.exports = options => {
 	// Render html
 	res = reqTpl.render(_.assignIn({}, {
 		promise: config.promise,
-		userConfig: JSON.stringify({
-			ignoreResponse: config.ignoreResponse
-		}),
 		apiList: userConfig.api.map(userAPI => {
 			const api = _.assignIn({}, config, userAPI);
 
@@ -88,8 +87,8 @@ module.exports = options => {
 				credentials: api.credentials,
 				timeout: api.timeout,
 				isSuccess: JSON.stringify(api.isSuccess),
-				successParam: JSON.stringify(config.success.concat(api.success)),
-				failParam: JSON.stringify(config.fail.concat(api.fail)),
+				successParam: JSON.stringify(api.success),
+				failParam: JSON.stringify(api.fail),
 				headers: JSON.stringify(api.headers),
 				dataType: api.dataType.toLowerCase()
 			});
