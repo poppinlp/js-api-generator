@@ -1,6 +1,6 @@
 {
 	"name": "js-api-generator",
-	"version": "2.0.0-beta.5",
+	"version": "2.0.0-beta.6",
 	"description": "Generate api module from config file.",
 	"main": "main.js",
 	"scripts": {
