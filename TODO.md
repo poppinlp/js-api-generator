@@ -1,3 +1,4 @@
+- Make sure reject response object
 - Add cli tool
 - Add test case
 - Add code coverage
