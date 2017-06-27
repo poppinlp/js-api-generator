@@ -1,4 +1,5 @@
-- Make sure reject response object
+- Support input file list
+- Support convert params to kebab-case or snake-case
 - Add cli tool
 - Add test case
 - Add code coverage

@@ -437,7 +437,7 @@ File encoding for config file and output file.
 var api = require('js-api-generator');
 var result = api({
     target: 'target yaml path',
-    // other options
+    // e.t.c
 });
 ```
 

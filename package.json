@@ -31,12 +31,12 @@
 		"js-yaml": "^3.8.4",
 		"lodash": "^4.17.4",
 		"mkpath": "^1.0.0",
-		"rollup": "^0.42.0"
+		"rollup": "^0.43.0"
 	},
 	"devDependencies": {
 		"ava": "^0.19.1",
-		"eslint": "^3.19.0",
+		"eslint": "^4.1.1",
 		"eslint-config-handsome": "^0.1.6",
-		"npm-check-updates": "^2.11.3"
+		"npm-check-updates": "^2.12.1"
 	}
 }
