@@ -154,15 +154,17 @@ Use to determine success or fail for requesting.
 - success: response object must has same key-value pair for every key-value pair in this object
 - fail: any mismatch
 
-#### success {Object}
+#### success {Object | Null}
 
 Use to constitute a callback param when success. The object should be like what `needs` option expect.
+Will return all response data and do no type check if `success` option is `null`.
 
 __NOTE__: This only works when response is a plain object, otherwise you'll get the whole response.
 
-#### fail {Object}
+#### fail {Object | Null}
 
 Use to constitute a callback param when fail. The object should be like what `needs` option expect.
+Will return all response data and do no type check if `fail` option is `null`.
 
 __NOTE__: This only works when response is a plain object, otherwise you'll get the whole response.
 
@@ -280,13 +282,13 @@ For all api. Will be covered by `api.timeout`.
 
 #### success {Object}
 
-Default: `{}`
+Default: `null`
 
 For all api. Will be extended by `api.success`.
 
 #### fail {Object}
 
-Default: `{}`
+Default: `null`
 
 For all api. Will be extended by `api.fail`.
 
