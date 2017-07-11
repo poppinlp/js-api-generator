@@ -5,6 +5,8 @@
 	- `success` and `fail` option now expect an object to check param type rather than array.
 	- Remove `ignoreResponse` option.
 	- Delete DEPRECATE method in 1.x.
+- Ver 1.9.5
+	- Fix chrome version for send body polyfill
 - Ver 1.9.4
 	- Add `rootUrl` option to set prefix path for all api `url`.
 - Ver 1.9.3
