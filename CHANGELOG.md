@@ -1,3 +1,5 @@
+- Ver 1.9.5
+	- Fix chrome version for send body polyfill
 - Ver 1.9.4
 	- Add `rootUrl` option to set prefix path for all api `url`.
 - Ver 1.9.3
