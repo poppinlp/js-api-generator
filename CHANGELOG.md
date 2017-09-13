@@ -1,3 +1,5 @@
+- Ver 1.9.6
+	- Fix body init type bug
 - Ver 1.9.5
 	- Fix chrome version for send body polyfill
 - Ver 1.9.4
