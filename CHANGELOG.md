@@ -1,3 +1,5 @@
+- Ver 1.9.7
+	- Fix [issue 1](https://github.com/poppinlp/js-api-generator/issues/1)
 - Ver 1.9.6
 	- Fix body init type bug
 - Ver 1.9.5
