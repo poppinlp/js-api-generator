@@ -1,48 +1,40 @@
 {
-	"name": "js-api-generator",
-	"version": "1.9.7",
-	"description": "Generate api module from config file.",
-	"main": "main.js",
-	"scripts": {
-		"test": "node ./test/test.js"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/poppinlp/js-api-generator.git"
-	},
-	"keywords": [
-		"js",
-		"api",
-		"generator",
-		"request",
-		"fetch",
-		"ajax"
-	],
-	"author": "PoppinL",
-	"license": "MIT",
-	"bugs": {
-		"url": "https://github.com/poppinlp/js-api-generator/issues"
-	},
-	"homepage": "https://github.com/poppinlp/js-api-generator#readme",
-	"dependencies": {
-		"browserify": "^14.4.0",
-		"hogan.js": "^3.0.2",
-		"js-yaml": "^3.10.0",
-		"lodash": "^4.17.4",
-		"mkpath": "^1.0.0",
-		"rollup": "^0.49.3"
-	},
-	"devDependencies": {
-		"xo": "^0.18.2"
-	},
-	"xo": {
-		"rules": {
-			"no-unused-expressions": [
-				"error",
-				{
-					"allowShortCircuit": true
-				}
-			]
-		}
-	}
+  "name": "js-api-generator",
+  "version": "1.9.8",
+  "description": "Generate api module from config file.",
+  "main": "main.js",
+  "scripts": {
+    "eslint": "./node_modules/.bin/eslint .",
+    "test": "npm run eslint && node ./test/test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/poppinlp/js-api-generator.git"
+  },
+  "keywords": [
+    "js",
+    "api",
+    "generator",
+    "request",
+    "fetch",
+    "ajax"
+  ],
+  "author": "PoppinL",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/poppinlp/js-api-generator/issues"
+  },
+  "homepage": "https://github.com/poppinlp/js-api-generator#readme",
+  "dependencies": {
+    "browserify": "14.4.0",
+    "hogan.js": "3.0.2",
+    "js-yaml": "3.10.0",
+    "lodash": "4.17.4",
+    "mkpath": "1.0.0",
+    "rollup": "0.50.0"
+  },
+  "devDependencies": {
+    "eslint": "4.7.2",
+    "eslint-config-handsome": "0.2.7"
+  }
 }

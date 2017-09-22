@@ -1,3 +1,8 @@
+- Ver 1.9.8
+	- Fix json response parse
+	- Fix body for browsers no native URLSearchParams
+	- Add eslint in test flow
+	- Use eslint-config-handsome instead of xo
 - Ver 1.9.7
 	- Fix [issue 1](https://github.com/poppinlp/js-api-generator/issues/1)
 - Ver 1.9.6

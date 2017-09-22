@@ -1,9 +1,9 @@
 const path = require('path');
 const fs = require('fs');
-const execSync = require('child_process').execSync;
+const { execSync } = require('child_process');
 
+const assign = require('lodash/assign');
 const yaml = require('js-yaml');
-const _ = require('lodash');
 const hogan = require('hogan.js');
 const mkpath = require('mkpath');
 
@@ -39,39 +39,36 @@ const DEFAULT_API_CONFIG = {
 
 const readFile = (s, u = 'utf8') => fs.readFileSync(s, u);
 
-module.exports = options => {
-	options = _.assignIn({}, DEFAULT_OPTIONS, options);
-
-	const pwd = path.dirname(process.mainModule.filename);
-	const inputFilePath = path.isAbsolute(options.target) ? options.target : path.join(pwd, options.target);
-
-	const reqTpl = hogan.compile(readFile(REQUEST_TPL));
-	const apiTpl = hogan.compile(readFile(API_TPL));
-
-	const userConfig = yaml.safeLoad(readFile(inputFilePath, options.encoding));
-	const config = _.assignIn({}, DEFAULT_API_CONFIG, userConfig.config);
+module.exports = userOptions => {
+	const
+		options = assign({}, DEFAULT_OPTIONS, userOptions),
+		pwd = path.dirname(process.mainModule.filename),
+		inputFilePath = path.isAbsolute(options.target) ? options.target : path.join(pwd, options.target),
+		reqTpl = hogan.compile(readFile(REQUEST_TPL)),
+		apiTpl = hogan.compile(readFile(API_TPL)),
+		userConfig = yaml.safeLoad(readFile(inputFilePath, options.encoding)),
+		config = assign({}, DEFAULT_API_CONFIG, userConfig.config);
 
 	const errMsg = (() => {
 		const file = options.lang.toLowerCase();
 		const filePath = path.join(__dirname, 'lang', `${file}.yml`);
 
-		if (!fs.existsSync(filePath)) {
+		if (!fs.existsSync(filePath))
 			throw new Error(`Don't support language: ${file}. Welcome PR >.<`);
-		}
 
-		return _.assignIn({}, yaml.safeLoad(readFile(filePath)), config.errorMessage);
+		return assign({}, yaml.safeLoad(readFile(filePath)), config.errorMessage);
 	})();
 
 	let res;
 
 	// Render html
-	res = reqTpl.render(_.assignIn({}, {
+	res = reqTpl.render(assign({}, {
 		promise: config.promise,
 		userConfig: JSON.stringify({
 			ignoreResponse: config.ignoreResponse
 		}),
-		apiList: userConfig.api.map(api => {
-			api = _.assignIn({}, config, api);
+		apiList: userConfig.api.map(userApi => {
+			const api = assign({}, config, userApi);
 
 			return apiTpl.render({
 				rootUrl: api.rootUrl,
@@ -102,10 +99,10 @@ module.exports = options => {
 
 		({
 			commonjs: () => {
-				execSync(path.join(__dirname, 'node_modules/.bin/browserify') + ` -r ${TMP_FILE_PATH}:${options.browser} > ${TMP_FILE_PATH}2`);
+				execSync(`${path.join(__dirname, 'node_modules/.bin/browserify')} -r ${TMP_FILE_PATH}:${options.browser} > ${TMP_FILE_PATH}2`);
 			},
 			es2015: () => {
-				execSync(path.join(__dirname, 'node_modules/.bin/rollup') + ` -o ${TMP_FILE_PATH}2 -f iife -n ${options.browser} -- ${TMP_FILE_PATH}`);
+				execSync(`${path.join(__dirname, 'node_modules/.bin/rollup')} -o ${TMP_FILE_PATH}2 -f iife -n ${options.browser} -- ${TMP_FILE_PATH}`);
 			}
 		})[options.module]();
 
