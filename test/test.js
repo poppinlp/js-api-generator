@@ -1,6 +1,5 @@
-const
-	api = require('../main.js'), 
-	log = console.log;
+const api = require('../main.js');
+const log = console.log;
 
 log('TEST DEFAULT CONFIG...');
 api({

@@ -5,6 +5,15 @@
 	- `success` and `fail` option now expect an object to check param type rather than array.
 	- Remove `ignoreResponse` option.
 	- Delete DEPRECATE method in 1.x.
+- Ver 1.9.8
+	- Fix json response parse
+	- Fix body for browsers no native URLSearchParams
+	- Add eslint in test flow
+	- Use eslint-config-handsome instead of xo
+- Ver 1.9.7
+	- Fix [issue 1](https://github.com/poppinlp/js-api-generator/issues/1)
+- Ver 1.9.6
+	- Fix body init type bug
 - Ver 1.9.5
 	- Fix chrome version for send body polyfill
 - Ver 1.9.4

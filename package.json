@@ -4,8 +4,8 @@
 	"description": "Generate api module from config file.",
 	"main": "main.js",
 	"scripts": {
-		"test": "node ./test/test.js",
-		"upDep": "./node_modules/.bin/npm-check-updates -ua"
+    "eslint": "./node_modules/.bin/eslint .",
+		"test": "node ./test/test.js"
 	},
 	"repository": {
 		"type": "git",
@@ -38,5 +38,5 @@
 		"eslint": "^4.1.1",
 		"eslint-config-handsome": "^0.1.6",
 		"npm-check-updates": "^2.12.1"
-	}
+  }
 }

@@ -58,17 +58,16 @@ module.exports = userOption => {
 		const file = options.lang.toLowerCase();
 		const filePath = path.join(__dirname, 'lang', `${file}.yml`);
 
-		if (!fs.existsSync(filePath)) {
+		if (!fs.existsSync(filePath))
 			throw new Error(`Don't support language: ${file}. Welcome PR >.<`);
-		}
 
-		return _.assignIn({}, yaml.safeLoad(readFile(filePath)), config.errorMessage);
+		return _.assign({}, yaml.safeLoad(readFile(filePath)), config.errorMessage);
 	})();
 
 	let res;
 
 	// Render html
-	res = reqTpl.render(_.assignIn({}, {
+	res = reqTpl.render(_.assign({}, {
 		promise: config.promise,
 		apiList: userConfig.api.map(userAPI => {
 			const api = _.assignIn({}, config, userAPI);
@@ -103,10 +102,10 @@ module.exports = userOption => {
 
 		({
 			commonjs: () => {
-				execSync(path.join(__dirname, 'node_modules/.bin/browserify') + ` -r ${TMP_FILE_PATH}:${options.browser} > ${TMP_FILE_PATH}2`);
+				execSync(`${path.join(__dirname, 'node_modules/.bin/browserify')} -r ${TMP_FILE_PATH}:${options.browser} > ${TMP_FILE_PATH}2`);
 			},
 			es2015: () => {
-				execSync(path.join(__dirname, 'node_modules/.bin/rollup') + ` -o ${TMP_FILE_PATH}2 -f iife -n ${options.browser} -- ${TMP_FILE_PATH}`);
+				execSync(`${path.join(__dirname, 'node_modules/.bin/rollup')} -o ${TMP_FILE_PATH}2 -f iife -n ${options.browser} -- ${TMP_FILE_PATH}`);
 			}
 		})[options.module]();
 
