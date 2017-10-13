@@ -1,6 +1,6 @@
 - Ver 2.0.0 [BREAK CHANGE]
-	- Support `fetch` and `XMLHttpRequest` both.
-	- Add `requestBy` option to determine whether request tool to use.
+  - Support `fetch` and `XMLHttpRequest` both.
+  - Add `requestBy` option to determine whether request tool to use.
 	- Will return origin response if resposne is not a plain object.
 	- `success` and `fail` option now expect an object to check param type rather than array.
 	- Remove `ignoreResponse` option.

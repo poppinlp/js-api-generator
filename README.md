@@ -1,6 +1,8 @@
 # js-api-generator
 
 [![Build Status][ci-img]][ci-url]
+[![Code coverage][cov-img]][cov-url]
+[![Code style][lint-img]][lint-url]
 [![Dependency Status][dep-img]][dep-url]
 [![Dev Dependency Status][dev-dep-img]][dev-dep-url]
 [![NPM version][npm-ver-img]][npm-url]
@@ -13,8 +15,8 @@ Generate module for API requesting:
 - from easy config file
 - with Promise returned
 - by XMLHttpRequest or fetch API since 2.0.0
-	- Wish only XMLHttpRequest? See [tag 0.2.4](https://github.com/poppinlp/js-api-generator/tree/v0.2.4))
-	- Wish only fetch? See [tag 1.9.4](https://github.com/poppinlp/js-api-generator/tree/v1.9.4))
+  - Wish only XMLHttpRequest? See [tag 0.2.4](https://github.com/poppinlp/js-api-generator/tree/v0.2.4))
+  - Wish only fetch? See [tag 1.9.4](https://github.com/poppinlp/js-api-generator/tree/v1.9.4))
 - builtin browserify and rollup
 - e.t.c
 
@@ -456,6 +458,12 @@ npm test
 
 [ci-img]:https://img.shields.io/travis/poppinlp/js-api-generator.svg?style=flat-square
 [ci-url]:https://travis-ci.org/poppinlp/js-api-generator
+
+[cov-img]:https://img.shields.io/coveralls/poppinlp/js-api-generator.svg?style=flat-square
+[cov-url]:https://coveralls.io/github/poppinlp/js-api-generator?branch=master
+
+[lint-img]:https://img.shields.io/badge/code%20style-handsome-brightgreen.svg?style=flat-square
+[lint-url]:https://github.com/poppinlp/eslint-config-handsome
 
 [dep-img]:https://img.shields.io/david/poppinlp/js-api-generator.svg?style=flat-square
 [dep-url]:https://david-dm.org/poppinlp/js-api-generator
