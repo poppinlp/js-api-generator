@@ -1,6 +1,6 @@
 # CHANGELOG
 
-- Ver 1.9.9
+- Ver 1.9.10
 	- Fix cache condition for same request.
 - Ver 1.9.8
 	- Fix json response parse

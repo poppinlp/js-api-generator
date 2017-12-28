@@ -53,8 +53,9 @@ module.exports = userOptions => {
 		const file = options.lang.toLowerCase();
 		const filePath = path.join(__dirname, 'lang', `${file}.yml`);
 
-		if (!fs.existsSync(filePath))
+		if (!fs.existsSync(filePath)) {
 			throw new Error(`Don't support language: ${file}. Welcome PR >.<`);
+		}
 
 		return assign({}, yaml.safeLoad(readFile(filePath)), config.errorMessage);
 	})();
