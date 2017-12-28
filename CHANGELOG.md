@@ -1,3 +1,7 @@
+# CHANGELOG
+
+- Ver 1.9.9
+	- Fix cache condition for same request.
 - Ver 1.9.8
 	- Fix json response parse
 	- Fix body for browsers no native URLSearchParams
