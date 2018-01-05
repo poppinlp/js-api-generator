@@ -1,5 +1,7 @@
 # CHANGELOG
 
+- Ver 1.9.11
+	- Fix array response.
 - Ver 1.9.10
 	- Fix cache condition for same request.
 - Ver 1.9.8
