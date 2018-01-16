@@ -21,7 +21,7 @@ const DEFAULT_API_CONFIG = {
 	isSuccess: {},
 	ignoreResponse: false,
 	timeout: 5000,
-	success: null,
+	success: [],
 	fail: [],
 	needs: {},
 	promise: 'Promise',
