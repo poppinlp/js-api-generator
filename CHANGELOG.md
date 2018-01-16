@@ -1,6 +1,6 @@
 # CHANGELOG
 
-- Ver 1.10.0
+- Ver 1.10.1
 	- Return all response when no `success` param.
 	- Bump dependencies version.
 - Ver 1.9.11
