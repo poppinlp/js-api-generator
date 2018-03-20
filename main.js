@@ -47,7 +47,7 @@ module.exports = userOptions => {
 		reqTpl = hogan.compile(readFile(REQUEST_TPL)),
 		apiTpl = hogan.compile(readFile(API_TPL)),
 		userConfig = yaml.safeLoad(readFile(inputFilePath, options.encoding)),
-		config = assign({}, DEFAULT_API_CONFIG, userConfig.config);
+		config = assign({}, DEFAULT_API_CONFIG, options.config, userConfig.config);
 
 	const errMsg = (() => {
 		const file = options.lang.toLowerCase();
