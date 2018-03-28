@@ -193,9 +193,9 @@ config:
 
 The generated module includes all APIs in config file.
 
-* Each API accepts an object param which contains `params`, `data` and `config` fields.
+* Each API accepts an object param which contains `params`, `body` and `config` fields.
   * params: use to make up query string in url.
-  * data: use to make up request body.
+  * body: use to make up request body.
   * config: use to overwrite the options from config file.
 * Each API returns a Promise. The status of promise will determined by http status code and `succCond`.
 * Each API won't send request again before response or timeout, but the callback will be queued and will be triggered when get response or timeout.
@@ -251,13 +251,13 @@ The export of this package in CommonJS is a function. You could just require thi
 
 ### CLI
 
-You could see the bin file in `./node_modules/.bin` and use it by `npx js-api-generator --options`.
+You could see the bin file in `./node_modules/.bin` and use it by `npx js-api-generator --option=value`.
 
 ### Options
 
 The follow options are used to generate module, not for config file.
 
-#### target {String}
+#### config {String}
 
 Yaml config file path. Should be absolute path or relative to your current working directory.
 
@@ -269,9 +269,9 @@ The file path for generated module. Should be absolute path or relative to your 
 
 ```js
 var api = require('js-api-generator');
-var result = api({
-  target: 'target yaml path'
-  // e.t.c
+var code = api({
+  config: 'config yaml path',
+  output: 'output js path
 });
 ```
 
