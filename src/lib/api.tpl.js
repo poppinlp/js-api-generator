@@ -1,6 +1,6 @@
 {{#isCommonJS}}exports.{{/isCommonJS}}
 {{^isCommonJS}}export const {{/isCommonJS}}
-{{name}} = data => new {{promise}}((resolve, reject) => makeRequest({
+{{name}} = ({ params = {}, data = {}, config = {} }) => new Promise((resolve, reject) => makeRequest({
 	requestBy: "{{requestBy}}",
 	rootUrl: "{{rootUrl}}",
 	needs: {{{needs}}},
