@@ -1,3 +1,5 @@
 extends:
   - handsome
   - prettier
+globals:
+  axios: true

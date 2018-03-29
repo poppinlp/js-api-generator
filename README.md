@@ -58,15 +58,6 @@ Default: `''`
 
 Specify the module name.
 
-#### lang {String}
-
-Default: `english`
-
-Specify the language of error message. Case insensitivity. Supported list:
-
-* English
-* Chinese
-
 #### withAxios {Boolean}
 
 Default: `true`
@@ -77,7 +68,7 @@ Specify the output module includes axios code or not.
 
 Provide global options which will be overwrote by same option in `api` object.
 
-#### baseUrl {String}
+#### baseURL {String}
 
 Default: `''`
 
@@ -100,6 +91,25 @@ Specify custom headers for request such as `X-Requested-With`.
 Default: `5000`
 
 Specify the number of milliseconds before request times out.
+
+#### responseType {String}
+
+Default: `json`
+
+Specify the type of response data. Supported list:
+
+* arraybuffer
+* blob
+* document
+* json
+* text
+* stream
+
+#### withCredentials {Boolean}
+
+Default: `false`
+
+Indicates whether or not cross-site Access-Control requests should be made using credentials
 
 ### api field
 
@@ -180,7 +190,7 @@ api:
       - String
 
 config:
-  baseUrl: http://helloworld.com
+  baseURL: http://helloworld.com
   succCond:
     code: 0
   headers:

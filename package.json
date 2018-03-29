@@ -11,7 +11,15 @@
 		"type": "git",
 		"url": "git+https://github.com/poppinlp/js-api-generator.git"
 	},
-	"keywords": ["codegen", "api", "definition", "documentation", "request", "fetch", "ajax"],
+	"keywords": [
+		"codegen",
+		"api",
+		"definition",
+		"documentation",
+		"request",
+		"fetch",
+		"ajax"
+	],
 	"author": "PoppinL",
 	"license": "MIT",
 	"bugs": {
