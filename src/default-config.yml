@@ -1,0 +1,12 @@
+build:
+  module: es2015
+  moduleName: ''
+  withAxios: true
+config:
+  baseURL: ''
+  method: get
+  headers: {}
+  timeout: 5000
+  responseType: json
+  withCredentials: false
+

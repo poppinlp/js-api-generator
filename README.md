@@ -44,7 +44,7 @@ Specify some options for building the output module.
 
 #### module {String}
 
-Default: `commonjs`
+Default: `es2015`
 
 Specify the module spec of output file. Case insensitivity. Supported list:
 
@@ -269,11 +269,11 @@ The follow options are used to generate module, not for config file.
 
 #### config {String}
 
-Yaml config file path. Should be absolute path or relative to your current working directory.
+Yaml config file path. Should be absolute path or relative to the file you executed.
 
 #### output {String}
 
-The file path for generated module. Should be absolute path or relative to your current working directory.
+The file path for generated module. Should be absolute path or relative to the file you executed.
 
 ### Package Usage Example
 
