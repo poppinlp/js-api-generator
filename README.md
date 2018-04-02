@@ -51,6 +51,7 @@ Specify the module spec of output file. Case insensitivity. Supported list:
 * CommonJS
 * ES2015
 * IIFE
+* umd
 
 #### moduleName {String}
 
