@@ -50,7 +50,6 @@ module.exports = async ({ config, output }) => {
 	});
 
 	bundle.generate({
-		// file
 		format: options.build.module
 	});
 };
