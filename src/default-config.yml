@@ -9,4 +9,3 @@ config:
   timeout: 5000
   responseType: json
   withCredentials: false
-

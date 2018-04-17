@@ -14,10 +14,10 @@ Generate module for API requesting:
 * follow CommonJS specification or ES2015
 * from easy config file
 * with Promise returned
-* use axios to send XMLHttpRequest since 2.0.0
-  * Wish use fetch? See [tag 1.10.3](https://github.com/poppinlp/js-api-generator/tree/v1.10.3)
-* pack by rollup
-* could overwrite options as
+* use [axios](https://github.com/axios/axios) to send XMLHttpRequest since 2.0.0
+  * Want to use fetch API? See [tag 1.10.3](https://github.com/poppinlp/js-api-generator/tree/v1.10.3)
+* pack by [rollup](https://github.com/rollup/rollup)
+* could overwrite options from caller
 * e.t.c
 
 ## Getting Started
@@ -59,11 +59,11 @@ Default: `''`
 
 Specify the module name.
 
-#### withAxios {Boolean}
+#### target {String}
 
-Default: `true`
+Default: `browser`
 
-Specify the output module includes axios code or not.
+Specify the target env for output module. Could be `browser` or `node`.
 
 ### `config` field
 
@@ -92,6 +92,62 @@ Specify custom headers for request such as `X-Requested-With`.
 Default: `5000`
 
 Specify the number of milliseconds before request times out.
+
+#### requestFormat {String}
+
+Default: `Origin`
+
+Specify how to transform request data. Case insensitivity. `Origin` will be used if can't match any type. Supported type list:
+
+##### URLSearchParams
+
+Use [URLSearchParams](https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams) to construct passed in data.
+Maybe you need [this polyfill](https://github.com/poppinlp/simple-url-search-params) for IE.
+
+Will set `Content-Type` to `application/x-www-form-urlencoded` in request headers automatically since some browser don't support `URLSearchParams` and they won't add that header even if you use `URLSearchParams` polyfill. You could overwrite it by `headers` option.
+
+**NOTE**: This is **NOT** the normal url-encoded way to serialize params. If you want that please see bellow.
+
+##### QueryString
+
+Use [jquery-like method](http://api.jquery.com/jQuery.param/) to serialize passed in data.
+
+```js
+// For example:
+
+{ foo: [1, 2, 3], bar: { test: 'string' } }
+
+// will be serialize to
+
+'foo%5B%5D=1&foo%5B%5D=2&foo%5B%5D=3&bar%5Btest%5D=string'
+
+// which parsed like
+
+`
+foo[]:1
+foo[]:2
+foo[]:3
+bar[test]:string
+`
+```
+
+Will set `Content-Type` to `application/x-www-form-urlencoded` in request headers automatically. You could overwrite it by `headers` option.
+
+##### FormData
+
+Use [FormData](https://developer.mozilla.org/en-US/docs/Web/API/FormData) to construct passed in data.
+
+Will set `Content-Type` to `multipart/form-data` in request headers automatically.
+
+##### JSON
+
+Will stringify passed in data to a JSON string by [`JSON.stringify`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify).
+
+Will set `Content-Type` to `application/json` in request headers automatically. You could overwrite it by `headers` option.
+
+##### Origin
+
+Won't do anything for passed in data.
 
 #### responseType {String}
 
@@ -202,7 +258,7 @@ config:
 
 ## Generated Module
 
-The generated module includes all APIs in config file.
+The generated module will include all APIs in config file.
 
 * Each API accepts an object param which contains `params`, `body` and `config` fields.
   * params: use to make up query string in url.
@@ -214,6 +270,8 @@ The generated module includes all APIs in config file.
   * response: the response object determined by http status code, `succRsp` or `failRsp`.
   * xhr: the sent XMLHttpReqeust object.
 * The output module is in ES2015 syntax. You may transform it yourself if you want.
+
+**NOTE**: You need to have `axios` in your env to run the module which means global `axios` variable in browser or `axios` module in node.
 
 ### Generated Module Usage Sample
 

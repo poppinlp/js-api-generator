@@ -4,14 +4,15 @@ const yaml = require('js-yaml');
 const hogan = require('hogan.js');
 const merge = require('lodash.merge');
 const rollup = require('rollup');
+const rollupCommonjs = require('rollup-plugin-commonjs');
+const rollupNodeResolve = require('rollup-plugin-node-resolve');
 
 const DEFAULT_OPTIONS_FILE = path.join(__dirname, './default-config.yml');
 const API_TPL_FILE = path.join(__dirname, './api.tpl.js');
 const TMP_CODE_FILE = path.join(__dirname, './.tmp.js');
 const ENCODING = 'utf8';
 
-module.exports = ({ config, output }) => {
-	/*
+module.exports = async ({ config, output }) => {
 	if (!config) {
 		throw new Error(`Please specify config file path!`);
 	}
@@ -33,15 +34,23 @@ module.exports = ({ config, output }) => {
 		}))
 	});
 
-	console.log(apiCode);
+	console.log(options, output);
 
 	fs.writeFileSync(TMP_CODE_FILE, apiCode);
-	*/
 
-	rollup.rollup({
+	const bundle = await rollup.rollup({
 		input: TMP_CODE_FILE,
-		output: {
-			format: config.
-		}
+		plugins: [
+			rollupNodeResolve({
+				jsnext: true,
+				main: true
+			}),
+			rollupCommonjs({})
+		]
+	});
+
+	bundle.generate({
+		// file
+		format: options.build.module
 	});
 };
