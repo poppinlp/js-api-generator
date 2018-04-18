@@ -280,7 +280,7 @@ These are samples for using generated module.
 #### Node env with CommonJS generated module
 
 ```js
-var api = require('path/to/generated-api-module');
+const api = require('path/to/generated-api-module');
 
 api.yourApiName({
   // data to send
@@ -316,7 +316,7 @@ You could use this package via node module or CLI.
 
 ### Node Module
 
-The export of this package in CommonJS is a function. You could just require this, run that function and pass options in.
+The export of this package in CommonJS is a function. You could just require this and run that function with options.
 
 ### CLI
 
@@ -337,11 +337,15 @@ The file path for generated module. Should be absolute path or relative to the f
 ### Package Usage Example
 
 ```js
-var api = require('js-api-generator');
-var code = api({
-  config: 'config yaml path',
+const api = require('js-api-generator');
+const code = api({
+  config: 'yaml config path',
   output: 'output js path
 });
+```
+
+```shell
+npx js-api-generator --config=/path/to/yml --output=/path/to/output
 ```
 
 ## Browser Compatibility
