@@ -1,6 +1,3 @@
-{{#withAxios}}
-import 'axios';
-{{/withAxios}}
 import sendReq from './request.js';
 
 {{#apis}}

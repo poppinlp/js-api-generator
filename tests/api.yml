@@ -1,59 +1,32 @@
 api:
--
-  url: //www.123.com/test/test1
-  method: put
-  name: createAlgorithm
-  mode: 'cors'
-  dataType: URLSearchParams
-  needs:
-    username: String
-    nickname?: String
-  success:
-    algorithmId: Number
-    updateTime?: Numer
--
-  url: /test/test2
-  method: delete
-  name: checkLogin
-  cache: 'no-cache'
-  timeout: 10000
-  dataType: FormData
-  needs:
-    test: Boolean
-  success:
-    username: String
-    avatar: String
--
-  url: /test/test2
-  name: editUser2
-  dataType: queryString
-  requestBy: ajax
--
-  url: /test/test3
-  method: post
-  name: editUser
-  dataType: Origin
-  isSuccess:
-    status: true
-  needs:
-    username: String
-    id:
-      - Number
-      - String
--
-  url: /test/:sid/:pid
-  method: get
-  name: getPt
-  needs:
-    sid: Number
-    pid?: Number
+  - url: /test/test1
+    name: getSome
+    params:
+      filter: String
+    succRsp:
+      numData: Number
+  - url: /test/test2
+    method: delete
+    name: delSome
+    timeout: 10000
+    requestFormat: urlsearchparams
+  - url: /test/test3
+    name: patchSome
+    requestFormat: formdata
+    body:
+      id:
+         - String
+         - Number
+      content: String
+      mark?: String
 
 config:
-  requestBy: fetch
-  isSuccess:
+  baseURL: //www.123.com
+  method: get
+  headers:
+    X-TEST: api-generator
+  requestFormat: querystring
+  succCond:
     code: 0
-  headers: {
-    Content-Type: application/x-www-form-urlencoded
-  }
-  fail:
+  failRsp:
     message: String

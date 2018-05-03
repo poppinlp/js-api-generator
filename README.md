@@ -59,12 +59,6 @@ Default: `''`
 
 Specify the module name.
 
-#### target {String}
-
-Default: `browser`
-
-Specify the target env for output module. Could be `browser` or `node`.
-
 ### `config` field
 
 Provide global options which will be overwrote by same option in `api` object.
@@ -149,6 +143,12 @@ Will set `Content-Type` to `application/json` in request headers automatically. 
 
 Won't do anything for passed in data.
 
+#### responseEncoding {String}
+
+Default: `utf8`
+
+Specify the encoding of response data.
+
 #### responseType {String}
 
 Default: `json`
@@ -161,6 +161,26 @@ Specify the type of response data. Supported list:
 * json
 * text
 * stream
+
+#### succCond {Object}
+
+Default: `{}`
+
+Define key and value to check the response data. The response will be treated as success when response object has same key-value pair for every key-value pair in this object.
+
+#### succRsp {Object | Null}
+
+Default: `null`
+
+Define the response data and type for success response. If provide an object, it should be in `params` field format. Otherwise provide a `null` means all response data will be returned with no type check.
+
+**NOTE**: This only works when response is a plain object, otherwise you'll get the whole response.
+
+#### failRsp {Object | Null}
+
+Default: `null`
+
+Define the response data and type for fail response. It's just like `succRsp` field.
 
 #### withCredentials {Boolean}
 
@@ -197,33 +217,13 @@ Define the request params. For all key-value pair, the key will be used as prope
 * Null
 * Any
 
-If a key is ended with `?`, the property name won't include the `?` and this key will be treated as optional.
+**NOTE**: If a key is ended with `?`, the property name won't include the `?` and this key will be treated as optional.
 
 #### body {Object}
 
 Default: `{}`
 
 Define the request body data. It's just like `params` field.
-
-#### succCond {Object}
-
-Default: `{}`
-
-Define key and value to check the response data. The response will be treated as success when response object has same key-value pair for every key-value pair in this object.
-
-#### succRsp {Object | Null}
-
-Default: `null`
-
-Define the response data and type for success response. If provide an object, it should be in `params` field format. Otherwise provide a `null` means all response data will be returned with no type check.
-
-**NOTE**: This only works when response is a plain object, otherwise you'll get the whole response.
-
-#### failRsp {Object | Null}
-
-Default: `null`
-
-Define the response data and type for fail response. It's just like `succRsp` field.
 
 ## API Config File Sample
 
@@ -232,26 +232,25 @@ build:
   module: es2015
 
 api:
--
-  url: /test1
-  method: put
-  name: foobar
-  timeout: 10000
-  succRsp:
-    data1: String
-    data2?: Number
-  failRsp:
-    data3: Array
-    data4?:
-      - Number
-      - String
+  - url: /test1
+    method: put
+    name: foobar
+    timeout: 10000
+    succRsp:
+      data1: String
+      data2?: Number
+    failRsp:
+      data3: Array
+      data4?:
+        - Number
+        - String
 
 config:
   baseURL: http://helloworld.com
   succCond:
     code: 0
   headers:
-    Content-Type: application/x-www-form-urlencoded
+    X-TEST: foobar
   failRsp:
     message: String
 ```
@@ -340,7 +339,7 @@ The file path for generated module. Should be absolute path or relative to the f
 const api = require('js-api-generator');
 const code = api({
   config: 'yaml config path',
-  output: 'output js path
+  output: 'output/js/path'
 });
 ```
 
