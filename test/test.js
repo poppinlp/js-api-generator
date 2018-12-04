@@ -3,21 +3,21 @@ const { log } = console;
 
 log('TEST DEFAULT CONFIG...');
 api({
-	target: './api.yml'
+	target: './api.yml',
 });
 log('SUCCESS!');
 
 log('TEST BROWSERIFY...');
 api({
 	target: './api.yml',
-	browser: 'myModule'
+	browser: 'myModule',
 });
 log('SUCCESS!');
 
 log('TEST ES2015 MODULE...');
 api({
 	target: './api.yml',
-	module: 'es2015'
+	module: 'es2015',
 });
 log('SUCCESS!');
 
@@ -26,6 +26,6 @@ api({
 	target: './api.yml',
 	module: 'es2015',
 	browser: 'myModule',
-	outputFile: './output/output.js'
+	outputFile: './output/output.js',
 });
 log('SUCCESS!');

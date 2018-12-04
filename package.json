@@ -26,15 +26,15 @@
   },
   "homepage": "https://github.com/poppinlp/js-api-generator#readme",
   "dependencies": {
-    "browserify": "15.2.0",
-    "hogan.js": "3.0.2",
-    "js-yaml": "3.10.0",
-    "lodash": "4.17.4",
-    "mkpath": "1.0.0",
-    "rollup": "0.54.0"
+    "browserify": "^16.2.3",
+    "hogan.js": "^3.0.2",
+    "js-yaml": "^3.12.0",
+    "lodash": "^4.17.11",
+    "mkpath": "^1.0.0",
+    "rollup": "^0.67.4"
   },
   "devDependencies": {
-    "eslint": "4.14.0",
-    "eslint-config-handsome": "0.4.0"
+    "eslint": "^5.9.0",
+    "eslint-config-handsome": "^0.6.3"
   }
 }

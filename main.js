@@ -14,7 +14,7 @@ const DEFAULT_OPTIONS = {
 	lang: 'english',
 	module: 'commonjs',
 	browser: false,
-	encoding: 'utf8'
+	encoding: 'utf8',
 };
 const DEFAULT_API_CONFIG = {
 	rootUrl: '',
@@ -32,9 +32,9 @@ const DEFAULT_API_CONFIG = {
 	credentials: 'same-origin',
 	headers: {
 		Accept: 'application/json, */*; q=0.01',
-		'Accept-Charset': 'utf-8'
+		'Accept-Charset': 'utf-8',
 	},
-	dataType: 'Origin'
+	dataType: 'Origin',
 };
 
 const readFile = (s, u = 'utf8') => fs.readFileSync(s, u);
@@ -66,7 +66,7 @@ module.exports = userOptions => {
 	res = reqTpl.render(assign({}, {
 		promise: config.promise,
 		userConfig: JSON.stringify({
-			ignoreResponse: config.ignoreResponse
+			ignoreResponse: config.ignoreResponse,
 		}),
 		apiList: userConfig.api.map(userApi => {
 			const api = assign({}, config, userApi);
@@ -87,9 +87,9 @@ module.exports = userOptions => {
 				successParam: JSON.stringify(config.success.concat(api.success)),
 				failParam: JSON.stringify(config.fail.concat(api.fail)),
 				headers: JSON.stringify(api.headers),
-				dataType: api.dataType.toLowerCase()
+				dataType: api.dataType.toLowerCase(),
 			});
-		}).join('')
+		}).join(''),
 	}, errMsg));
 
 	// Do browserify
@@ -104,7 +104,7 @@ module.exports = userOptions => {
 			},
 			es2015: () => {
 				execSync(`${path.join(__dirname, 'node_modules/.bin/rollup')} -o ${TMP_FILE_PATH}2 -f iife -n ${options.browser} -- ${TMP_FILE_PATH}`);
-			}
+			},
 		})[options.module]();
 
 		res = readFile(`${TMP_FILE_PATH}2`);
@@ -118,7 +118,7 @@ module.exports = userOptions => {
 
 		mkpath.sync(path.parse(targetPath).dir);
 		fs.writeFileSync(targetPath, res, {
-			encoding: options.encoding
+			encoding: options.encoding,
 		});
 	}
 
